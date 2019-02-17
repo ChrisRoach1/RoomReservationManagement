@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@if (User.IsInRole("RR_Admin"))
+{
+    <div class="jumbotron">
+        <h1>You are an admin</h1>
+    </div>
+}
+
+
+@if (User.IsInRole("Basic"))
+{
+    <div class="jumbotron">
+        <h1>You are a basic user</h1>
+    </div>
+}

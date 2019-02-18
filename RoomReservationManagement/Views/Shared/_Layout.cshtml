@@ -1,47 +1,59 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/CustomStyle.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Room Reservation", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (User.IsInRole("RR_Admin"))
+    <div class="wrapper">
+        <nav id="sidebar">
+            <ul class="list-unstyled components">
+
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "list-unstyled components" }))
                     {
-                        <li>@Html.ActionLink("Admin", "Index", "Home")</li>
+                        @Html.AntiForgeryToken()
+
+                        <li>
+                            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     }
-                    @if (User.IsInRole("Basic"))
-                    {
-                        <li>@Html.ActionLink("Basic", "Index", "Home")</li>
-                    }
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                }
+                @if (User.IsInRole("RR_Admin"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Home")</li>
+                }
+                @if (Request.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Rooms", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Reserve", "Index", "Home")</li>
+                }
+
+            </ul>
+        </nav>
+
+        <div class="content">
+            @RenderBody()
+            <footer id="footer">
+                <hr />
+                <p>&copy; @DateTime.Now.Year - Bateman Hospital - Room Reserveration</p>
+            </footer>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")

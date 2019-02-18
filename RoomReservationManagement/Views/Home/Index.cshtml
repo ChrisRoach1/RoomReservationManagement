@@ -3,17 +3,14 @@
 }
 
 
-@if (User.IsInRole("RR_Admin"))
-{
-    <div class="jumbotron">
-        <h1>You are an admin</h1>
-    </div>
-}
+<div>
 
-
-@if (User.IsInRole("Basic"))
-{
     <div class="jumbotron">
-        <h1>You are a basic user</h1>
+        <h1 class="display-4">Room Reservation Management</h1>
+        <p class="lead">Easily see all conference rooms available at the Mildred Mitchell-Bateman Hospital.</p>
+        <p class="lead">Reserve any room of your choice for a desired day and time.</p>
+        <hr class="my-4">
+        <a class="btn btn-secondary btn-lg" href="/Account/Login" role="button">Log In</a>
     </div>
-}
+
+</div>

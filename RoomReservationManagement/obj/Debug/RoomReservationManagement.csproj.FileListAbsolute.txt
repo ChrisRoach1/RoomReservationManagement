@@ -225,10 +225,12 @@ C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csprojAssemblyReference.cache
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.Migrations.first_migration.resources
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csproj.GenerateResource.cache
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csproj.CoreCompileInputs.cache
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csproj.CopyComplete
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.dll
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.pdb
+C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Google.Protobuf.dll
+C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Google.Protobuf.xml
+C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csprojAssemblyReference.cache

@@ -11,14 +11,19 @@ namespace RoomReservationManagement.Models
         [Key]
         public int room_id { get; set; }
 
+        [Required]
         public string room_name { get; set; }
 
+        [Required]
         public int room_cap { get; set; }
 
+        [Required]
         public int num_comp { get; set; }
 
+        [Required]
         public string proj_ind { get; set; }
 
+        [Required]
         public string void_ind { get; set; }
 
     }

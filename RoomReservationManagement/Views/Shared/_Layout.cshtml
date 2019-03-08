@@ -8,6 +8,10 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/CustomStyle.css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/wickedpicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/wickedpicker.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
 </head>
 <body>
@@ -58,6 +62,10 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
+    
+   
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

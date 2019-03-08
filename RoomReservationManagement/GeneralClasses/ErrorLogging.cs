@@ -10,21 +10,16 @@ namespace RoomReservationManagement.GeneralClasses
     {
         public static ApplicationDbContext db = new ApplicationDbContext();
 
-
         public void log_error(string app_name, string controller, string method_name,string error_mes)
         {
-
             error_log log = new error_log{
                 app_name = app_name,
                 controller = controller,
                 method_name = method_name,
                 error_mes = error_mes
             };
-
             db.Error_Logs.Add(log);
             db.SaveChanges();
         }
-
-
     }
 }

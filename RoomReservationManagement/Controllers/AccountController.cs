@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RoomReservationManagement.Models;
 using RoomReservationManagement.GeneralClasses;
+
 namespace RoomReservationManagement.Controllers
 {
     [Authorize]
@@ -151,6 +152,11 @@ namespace RoomReservationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            //string sample = "9/24/2017 10:31 PM";
+            //string start = "10:31:34 PM";
+            //string end = "11:35:34 PM";
+            //DateTime test = Convert.ToDateTime(sample, CultureInfo.InvariantCulture);
+
 
             if (ModelState.IsValid)
             {

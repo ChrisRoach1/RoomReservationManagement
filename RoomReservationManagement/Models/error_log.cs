@@ -19,5 +19,7 @@ namespace RoomReservationManagement.Models
 
         public string error_mes { get; set; }
 
+        public DateTime audit_create_dt { get; set; }
+
     }
 }

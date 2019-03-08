@@ -6,7 +6,7 @@ using System.Web;
 
 namespace RoomReservationManagement.Models
 {
-    public class res_email_xref
+    public class res_email_ref
     {
         [Key]
         public string position { get; set; }

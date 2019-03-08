@@ -13,13 +13,14 @@ namespace RoomReservationManagement.Models
         public int res_id { get; set; }
 
         [Required]
+        [Display(Name = "Date")]
         public DateTime res_dt { get; set; }
 
         [Required]
-        public string res_start { get; set; }
+        public DateTime res_start { get; set; }
 
         [Required]
-        public string res_end { get; set; }
+        public DateTime res_end { get; set; }
 
         [ForeignKey("Res_Rooms")]
         public int room_id { get; set; }
@@ -27,7 +28,6 @@ namespace RoomReservationManagement.Models
         [Required]
         public string res_name { get; set; }
 
-        [Required]
         public string cat_ind { get; set; }
 
 

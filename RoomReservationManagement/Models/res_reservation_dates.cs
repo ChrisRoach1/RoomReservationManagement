@@ -13,9 +13,9 @@ namespace RoomReservationManagement.Models
 
         public DateTime day { get; set; }
 
-        public string start_tm { get; set; }
+        public DateTime start_tm { get; set; }
 
-        public string end_tm { get; set; }
+        public DateTime end_tm { get; set; }
 
         public string void_ind { get; set; }
 

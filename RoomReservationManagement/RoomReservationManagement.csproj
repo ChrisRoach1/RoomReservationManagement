@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="GeneralClasses\DateTimeHelper.cs" />
     <Compile Include="GeneralClasses\ErrorLogging.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -202,10 +203,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\DataOperations.cs" />
     <Compile Include="Models\error_log.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\res_email_xref.cs" />
+    <Compile Include="Models\res_email_ref.cs" />
     <Compile Include="Models\res_reservations.cs" />
     <Compile Include="Models\res_reservation_dates.cs" />
     <Compile Include="Models\res_reviews.cs" />

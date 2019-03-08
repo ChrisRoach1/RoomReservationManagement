@@ -19,7 +19,7 @@ namespace RoomReservationManagement.Models
         //all database model references will be declared here
         #region tables
         public virtual DbSet<error_log> Error_Logs { get; set; }
-        public virtual DbSet<res_email_xref> Res_Email_Xrefs { get; set; }
+        public virtual DbSet<res_email_ref> Res_Email_refs { get; set; }
         public virtual DbSet<res_reservation_dates> Res_Reservations_Dates { get; set; }
         public virtual DbSet<res_reservations> Res_Reservations { get; set; }
         public virtual DbSet<res_reviews> Res_Reviews { get; set; }

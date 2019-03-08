@@ -112,8 +112,9 @@
 </div>
 
 <script>
+    var dateToday = new Date();
     $(function () {
-        $("#date").datepicker({ format: 'dd/MM/yyyy' });
+        $("#date").datepicker({ format: 'dd/MM/yyyy', minDate: dateToday });
     });
 
     $('.timepicker').wickedpicker();

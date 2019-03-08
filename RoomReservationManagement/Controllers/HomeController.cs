@@ -10,6 +10,10 @@ namespace RoomReservationManagement.Controllers
     {
         public ActionResult Index()
         {
+            if(Request.IsAuthenticated && User.IsInRole("RR_Admin"))
+            {
+                Console.WriteLine("hello");
+            }
             return View();
         }
 

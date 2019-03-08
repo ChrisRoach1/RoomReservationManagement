@@ -25,6 +25,7 @@ namespace RoomReservationManagement.Models
 
         public string void_ind { get; set; }
 
+
         public virtual res_rooms Res_Rooms { get; set; }
 
 

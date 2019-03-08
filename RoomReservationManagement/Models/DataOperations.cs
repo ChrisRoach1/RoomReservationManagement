@@ -9,6 +9,12 @@ namespace RoomReservationManagement.Models
 {
     public class DataOperations
     {
+        /*
+         *Class is used to abstract data manipulation.
+         * This way controllers do not get cluttered with all of the CRUD logic.
+         * Also will easily allow for error catching/handling.
+         */
+
 
         public ApplicationDbContext databaseConnection = new ApplicationDbContext();
 

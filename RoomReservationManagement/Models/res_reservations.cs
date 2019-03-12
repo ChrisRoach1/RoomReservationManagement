@@ -33,6 +33,7 @@ namespace RoomReservationManagement.Models
 
         public string cat_order { get; set; }
 
+        public int ver_code { get; set; }
 
         public string void_ind { get; set; }
 

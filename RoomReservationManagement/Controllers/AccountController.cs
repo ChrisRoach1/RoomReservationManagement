@@ -160,12 +160,14 @@ namespace RoomReservationManagement.Controllers
             string date = "9/24/2017";
             string time = "10:31:34 PM";
             DateTimeHelper dtHelper = new DateTimeHelper();
+            VerificationCodeGenerator generator = new VerificationCodeGenerator();
             error_log test = new error_log();
             test = db.Error_Logs.Where(e => e.log_id == 5).SingleOrDefault();
             string dateTest = dtHelper.convertStampToDateString(test.audit_create_dt.Date);
             string timeTest = dtHelper.convertStampToTimeString(test.audit_create_dt);
             DateTime tester = dtHelper.convertStringToDatetime(date, time);
             DateTime tester1 = dtHelper.convertDateStringToDatetime(date);
+            int codeTest = generator.getVerificationCode();
             //error_log addtest = new error_log();
             //addtest.audit_create_dt = tester;
             //addtest.app_name = "test";

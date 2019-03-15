@@ -206,6 +206,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\DataOperations.cs" />
     <Compile Include="Models\error_log.cs" />
+    <Compile Include="Models\events.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\res_email_ref.cs" />

@@ -1,9 +1,14 @@
-﻿
+﻿@using RoomReservationManagement.Models;
 
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
+
+<input type="hidden" id="events" data-listOfEvents="@ViewBag.listOfEvents" />
 
 <div id="calendar">
 </div>
@@ -85,14 +90,17 @@
     ]
 
 
+    var eventList = @Html.Raw(Json.Encode(ViewBag.listOfEvents));
+
+    console.log(eventList);
 
     $('#calendar').fullCalendar({
-        events: events,
+        events: eventList,
         showNonCurrentDates: false,
         eventLimit: true, // for all non-agenda views
         views: {
-            agenda: {
-                eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+        agenda: {
+            eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
             }
         }
 });

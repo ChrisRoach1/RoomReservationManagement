@@ -1,124 +1,114 @@
-﻿@*@{
-        ViewBag.Title = "Home Page";
-    }
-
-    @if (User.IsInRole("Admin"))
-    {
-        <div>
-
-            <div class="jumbotron">
-                <h1 class="display-4">Room Reservation Management</h1>
-                <p class="lead">Easily see all conference rooms available at the Mildred Mitchell-Bateman Hospital.</p>
-                <p class="lead">Reserve any room of your choice for a desired day and time.</p>
-                <hr class="my-4">
-                <a class="btn btn-secondary btn-lg" href="/Account/Login" role="button">Log In</a>
-            </div>
-
-        </div>
-    }*@
-
-@model RoomReservationManagement.Models.res_reservations
+﻿
 
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>res_reservations</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.res_dt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.res_dt, new { htmlAttributes = new { @class = "form-control", id = "date" } })
-                @Html.ValidationMessageFor(model => model.res_dt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.res_start, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.res_start, new { htmlAttributes = new { @class = "form-control timepicker", name = "start" } })
-                @Html.ValidationMessageFor(model => model.res_start, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.res_end, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.res_end, new { htmlAttributes = new { @class = "form-control timepicker", name = "end" } })
-                @Html.ValidationMessageFor(model => model.res_end, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.room_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.room_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.room_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.res_name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.res_name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.res_name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.cat_ind, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cat_ind, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cat_ind, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.cat_order, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cat_order, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cat_order, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.void_ind, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.void_ind, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.void_ind, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div id="calendar">
 </div>
 
-<script>
-    var dateToday = new Date();
-    $(function () {
-        $("#date").datepicker({ format: 'dd/MM/yyyy', minDate: dateToday });
-    });
+<script type="text/javascript">
 
-    $('.timepicker').wickedpicker();
+    var events = [
+        {
+            start: "2019-03-12T11:00:00",
+            end: "2019-03-12T14:00:00",
+            title: "Event 2",
+            backgroundColor:"red"
+        },
+        {
+            start: "2019-03-15T12:35:00",
+            end: "2019-03-15T13:35:00",
+            title: "testing"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        },
+        {
+            start: "2019-03-23T11:07:56.000",
+            end: "2019-03-23T12:17:56.000",
+            title: "4"
+        }
+    ]
+
+
+
+    $('#calendar').fullCalendar({
+        events: events,
+        showNonCurrentDates: false,
+        eventLimit: true, // for all non-agenda views
+        views: {
+            agenda: {
+                eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+            }
+        }
+});
+
 </script>
+
+
+<style>
+
+    #calendar{
+        width:75%;
+        height: 55%;
+    }
+
+
+</style>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

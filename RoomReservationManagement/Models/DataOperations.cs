@@ -11,7 +11,7 @@ namespace RoomReservationManagement.Models
     {
         /*
          *Class is used to abstract data manipulation.
-         * This way controllers do not get cluttered with all of the CRUD logic.
+         * This way controllers do not get cluttered with CRUD logic.
          * Also will easily allow for error catching/handling.
          */
 

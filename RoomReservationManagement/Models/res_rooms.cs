@@ -15,10 +15,28 @@ namespace RoomReservationManagement.Models
         public string room_name { get; set; }
 
         [Required]
+        public string location { get; set; }
+
+        [Required]
         public int room_cap { get; set; }
 
         [Required]
         public int num_comp { get; set; }
+
+        [Required]
+        public int num_chairs { get; set; }
+
+        [Required]
+        public int num_tables { get; set; }
+
+        [Required]
+        public string board_typ { get; set; }
+
+        [Required]
+        public string network_ind { get; set; }
+
+        [Required]
+        public string teleconn_sys { get; set; }
 
         [Required]
         public string proj_ind { get; set; }

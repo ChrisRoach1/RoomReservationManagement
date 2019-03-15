@@ -13,13 +13,18 @@
     <script src="~/Scripts/wickedpicker.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
+    <script data-require="moment.js@**@" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
+
 </head>
 <body>
     <div class="wrapper">
         <nav id="sidebar">
             <ul class="list-unstyled components">
-
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
                 @if (Request.IsAuthenticated)
                 {
                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "list-unstyled components" }))
@@ -37,16 +42,24 @@
                     <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                     <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 }
+
                 @if (User.IsInRole("RR_Admin"))
                 {
-                    <li>@Html.ActionLink("Admin", "Index", "Home")</li>
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="#">Manage Accounts</a>
+                            </li>
+                            <li>
+                                <a href="#">Manage Rooms</a>
+                            </li>
+                            <li>
+                                <a href="#">Data Analytics</a>
+                            </li>
+                        </ul>
+                    </li>
                 }
-                @if (Request.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Rooms", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Reserve", "Index", "Home")</li>
-                }
-
             </ul>
         </nav>
 
@@ -63,8 +76,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
-    
-   
+
+
 
     @RenderSection("scripts", required: false)
 </body>

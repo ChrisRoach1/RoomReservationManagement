@@ -16,6 +16,8 @@ namespace RoomReservationManagement.GeneralClasses
      * pseudo random, but will work off the last greatest entry in the reservation table.
      * Example: last code used is "1431" we will pull it, add a random value to it and 
      * insert that as the new value.
+     * 
+     * New ways of mangling the old code can be implemented if so desired
      */
 
 

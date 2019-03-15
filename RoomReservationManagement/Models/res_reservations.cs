@@ -12,6 +12,10 @@ namespace RoomReservationManagement.Models
         [Key]
         public int res_id { get; set; }
 
+        
+        public string user_id { get; set; }
+
+
         [Required]
         [Display(Name = "Date")]
         public DateTime res_dt { get; set; }
@@ -38,6 +42,9 @@ namespace RoomReservationManagement.Models
         public string void_ind { get; set; }
 
         public virtual res_rooms Res_Rooms { get; set; }
+
+        [ForeignKey("user_id")]
+        public virtual ApplicationUser User { get; set; }
 
     }
 

@@ -8,11 +8,15 @@
 <div id="calendar">
 </div>
 
+
+<input type="hidden" value=@ViewBag.listOfEvents[0].backgroundColor id="testData" />
+
 <script type="text/javascript">
 
     var eventList = @Html.Raw(Json.Encode(ViewBag.listOfEvents));
 
-    console.log(eventList);
+    var test = $("#testData").val();
+    console.log(test);
 
     $('#calendar').fullCalendar({
         events: eventList,

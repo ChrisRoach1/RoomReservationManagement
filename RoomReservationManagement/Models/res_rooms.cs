@@ -36,7 +36,7 @@ namespace RoomReservationManagement.Models
         public string network_ind { get; set; }
 
         [Required]
-        public string teleconn_sys { get; set; }
+        public string telecon_sys { get; set; }
 
         [Required]
         public string proj_ind { get; set; }

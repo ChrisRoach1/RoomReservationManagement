@@ -5,90 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
-<input type="hidden" id="events" data-listOfEvents="@ViewBag.listOfEvents" />
-
 <div id="calendar">
 </div>
 
 <script type="text/javascript">
-
-    var events = [
-        {
-            start: "2019-03-12T11:00:00",
-            end: "2019-03-12T14:00:00",
-            title: "Event 2",
-            backgroundColor:"red"
-        },
-        {
-            start: "2019-03-15T12:35:00",
-            end: "2019-03-15T13:35:00",
-            title: "testing"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        },
-        {
-            start: "2019-03-23T11:07:56.000",
-            end: "2019-03-23T12:17:56.000",
-            title: "4"
-        }
-    ]
-
 
     var eventList = @Html.Raw(Json.Encode(ViewBag.listOfEvents));
 
@@ -100,7 +20,7 @@
         eventLimit: true, // for all non-agenda views
         views: {
         agenda: {
-            eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+            eventLimit: 20 // adjust to 6 only for agendaWeek/agendaDay
             }
         }
 });

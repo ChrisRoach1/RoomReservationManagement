@@ -211,7 +211,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\res_email_ref.cs" />
     <Compile Include="Models\res_reservations.cs" />
-    <Compile Include="Models\res_reservation_dates.cs" />
     <Compile Include="Models\res_reviews.cs" />
     <Compile Include="Models\res_rooms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

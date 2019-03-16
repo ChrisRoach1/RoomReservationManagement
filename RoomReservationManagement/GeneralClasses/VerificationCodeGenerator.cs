@@ -31,6 +31,12 @@ namespace RoomReservationManagement.GeneralClasses
         {
             int newCode;
             int lastUsedCode = databaseConnection.Res_Reservations.Select(p => p.ver_code).DefaultIfEmpty(1000).Max();
+
+            //since the default value is 0 we need to make sure we dont get a 0 value back
+            if(lastUsedCode == 0)
+            {
+                lastUsedCode = 1000;
+            }
             int ranValue = getRandomNumber(15, 175);
             newCode = lastUsedCode + ranValue;
             return newCode;

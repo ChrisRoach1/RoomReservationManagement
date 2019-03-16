@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RoomReservationManagement.Models;
 
 namespace RoomReservationManagement.Controllers
 {
@@ -12,6 +13,7 @@ namespace RoomReservationManagement.Controllers
         public string start;
         public string end;
         public string title;
+        public string backgroundColor;
     }
 
     public class eventList
@@ -23,60 +25,42 @@ namespace RoomReservationManagement.Controllers
     public class HomeController : Controller
     {
 
+        public ApplicationDbContext databaseConnection = new ApplicationDbContext();
 
 
         public ActionResult Index()
         {
-            if(Request.IsAuthenticated && User.IsInRole("RR_Admin"))
+
+            eventList eventList = new eventList();
+
+            eventList.eList = getEventDates();
+            ViewBag.listOfEvents = eventList.eList;
+            return View();
+        }
+
+
+
+        public List<events> getEventDates()
+        { 
+            DateTime today = DateTime.Now.Date;
+            eventList eventList = new eventList();
+            var futureEvents = databaseConnection.Res_Reservations.Where(r => r.res_start >= today && r.void_ind == "n" && r.reject_ind == "n").ToList();
+
+            foreach(var eventDate in futureEvents)
             {
-                Console.WriteLine("hello");
+                string start = eventDate.res_start.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
+                string end = eventDate.res_end.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
+                string backgroundColor = (eventDate.approved_ind == "y" ? "green" : "orange");
+                eventList.eList.Add(new events
+                {
+                    start = start,
+                    end = end,
+                    title = eventDate.Res_Rooms.room_name,
+                    backgroundColor = backgroundColor
+                });
             }
 
-            eventList lis = new eventList();
-
-
-            events ev1 = new events();
-            ev1.start = "2019-03-12T11:00:00";
-            ev1.end = "2019-03-12T14:00:00";
-            ev1.title = "test1";
-            events ev2 = new events();
-            ev2.start = "2019-03-15T12:35:00";
-            ev2.end = "2019-03-15T13:35:00";
-            ev2.title = "test2";
-            events ev3 = new events();
-            ev3.start = "2019-03-23T11:07:56.000";
-            ev3.end = "2019-03-23T12:17:56.000";
-            ev3.title = "test3";
-            events ev4 = new events();
-            ev4.start = "2019-03-23T11:07:56.000";
-            ev4.end = "2019-03-23T12:17:56.000";
-            ev4.title = "test4";
-            events ev5 = new events();
-            ev5.start = "2019-03-23T11:07:56.000";
-            ev5.end = "2019-03-23T12:17:56.000";
-            ev5.title = "test5";
-            events ev6 = new events();
-            ev6.start = "2019-03-23T11:07:56.000";
-            ev6.end = "2019-03-23T12:17:56.000";
-            ev6.title = "test6";
-            lis.eList.Add(ev1);
-            lis.eList.Add(ev2);
-            lis.eList.Add(ev3);
-            lis.eList.Add(ev4);
-            lis.eList.Add(ev5);
-            lis.eList.Add(ev6);
-
-            events[] allEvents = new events[6];
-            allEvents[0] = ev1;
-            allEvents[1] = ev2;
-            allEvents[2] = ev3;
-            allEvents[3] = ev4;
-            allEvents[4] = ev5;
-            allEvents[5] = ev6;
-
-            
-            ViewBag.listOfEvents = allEvents;
-            return View();
+            return eventList.eList;
         }
 
     }

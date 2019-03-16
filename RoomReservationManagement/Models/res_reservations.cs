@@ -15,7 +15,6 @@ namespace RoomReservationManagement.Models
         
         public string user_id { get; set; }
 
-
         [Required]
         [Display(Name = "Date")]
         public DateTime res_dt { get; set; }
@@ -39,6 +38,16 @@ namespace RoomReservationManagement.Models
 
         public int ver_code { get; set; }
 
+        [Required]
+        public string pending_ind { get; set; }
+
+        [Required]
+        public string approved_ind { get; set; }
+
+        [Required]
+        public string reject_ind { get; set; }
+
+        [Required]
         public string void_ind { get; set; }
 
         public virtual res_rooms Res_Rooms { get; set; }

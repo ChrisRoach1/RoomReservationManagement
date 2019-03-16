@@ -30,20 +30,6 @@ namespace RoomReservationManagement.Models
 
         #endregion email_ref CRUD
 
-
-        #region res_reservation_dates CRUD
-
-        public int addReservationDate(res_reservation_dates date)
-        {
-            databaseConnection.Res_Reservations_Dates.Add(date);
-            databaseConnection.SaveChanges();
-            return 1;
-        }
-
-
-        #endregion res_reservation_dates CRUD
-
-
         #region res_reservation CRUD
 
         public int addReservation(res_reservations reservation)

@@ -152,14 +152,13 @@ namespace RoomReservationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            EmailHelper email = new EmailHelper();
             //string sample = "9/24/2017 10:31 PM";
             //string start = "10:31:34 PM";
             //string end = "11:35:34 PM";
             //DateTime test = Convert.ToDateTime(sample, CultureInfo.InvariantCulture);
-            res_reservations res = new res_reservations();
-            res = db.Res_Reservations.Where(r => r.res_id == 7).SingleOrDefault();
-            string start = res.res_start.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
 
+            email.sendEmail("c.roach10@yahoo.com", "hello this is a message test", "test email");
             //string date = "9/24/2017";
             //string time = "10:31:34 PM";
             //DateTimeHelper dtHelper = new DateTimeHelper();

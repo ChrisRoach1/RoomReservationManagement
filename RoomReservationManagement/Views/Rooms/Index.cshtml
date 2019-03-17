@@ -1,0 +1,101 @@
+﻿@model IEnumerable<RoomReservationManagement.Models.res_rooms>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/three.min.js"></script>
+<script src="~/Content/panolensJS/build/panolens-offline.min.js"></script>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.room_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.room_cap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num_comp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num_chairs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num_tables)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.board_typ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.network_ind)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telecon_sys)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proj_ind)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.void_ind)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.room_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.room_cap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.num_comp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.num_chairs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.num_tables)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.board_typ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.network_ind)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telecon_sys)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proj_ind)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.void_ind)
+        </td>
+    </tr>
+}
+</table>
+<div>
+    <script>
+
+        var panorama, viewer;
+
+        panorama = new PANOLENS.ImagePanorama("https://i.imgur.com/Ed4LdEW.jpg");
+
+        viewer = new PANOLENS.Viewer();
+        viewer.add(panorama);
+
+    </script>
+</div>

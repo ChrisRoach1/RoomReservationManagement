@@ -4,14 +4,19 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Content/three.min.js"></script>
-<script src="~/Content/panolensJS/build/panolens-offline.min.js"></script>
+<script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+<style>
+    #panorama {
+        width: 600px;
+        height 400px;
+    }
+</style>
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table"
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.room_name)
@@ -87,15 +92,30 @@
     </tr>
 }
 </table>
-<div>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A simple example</title>
+    <link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
+    <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+    <style>
+        #panorama {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="panorama"></div>
     <script>
-
-        var panorama, viewer;
-
-        panorama = new PANOLENS.ImagePanorama("https://i.imgur.com/Ed4LdEW.jpg");
-
-        viewer = new PANOLENS.Viewer();
-        viewer.add(panorama);
-
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "../../Content/Images/sample2.jpg"
+        });
     </script>
-</div>
+
+</body>
+</html>

@@ -5,94 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+
+<h1>Rooms</h1>
+<!DOCTYPE HTML>
 <style>
+    .room {
+        padding: 15px;
+        background-color: #fafafa;
+        border-left: 6px solid #7f7f84;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+        box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+        border-color: #80D651;
+    }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 7px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
     #panorama {
         width: 600px;
-        height 400px;
+        height: 400px;
     }
+    
 </style>
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table"
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.room_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.room_cap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.num_comp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.num_chairs)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.num_tables)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.board_typ)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.network_ind)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telecon_sys)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.proj_ind)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.void_ind)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.room_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.room_cap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.num_comp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.num_chairs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.num_tables)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.board_typ)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.network_ind)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telecon_sys)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.proj_ind)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.void_ind)
-        </td>
-    </tr>
-}
-</table>
-<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
@@ -100,22 +44,96 @@
     <title>A simple example</title>
     <link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
     <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
-    <style>
-        #panorama {
-            width: 600px;
-            height: 400px;
-        }
-    </style>
 </head>
 <body>
 
-    <div id="panorama"></div>
-    <script>
-        pannellum.viewer('panorama', {
-            "type": "equirectangular",
-            "panorama": "../../Content/Images/sample2.jpg"
-        });
-    </script>
+    @foreach (var item in Model)
+    {
+        <div id="accordion">
+            <div class="room">
+                <h1 style="color:#80D651;">@Html.DisplayFor(modelItem => item.room_name)</h1>
+                <div id="headingOne">
+                    <button class="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Toggle Details
+                    </button>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Location
+                                </th>
+                                <th>
+                                    Capacity
+                                </th>
+                                <th>
+                                    Computers
+                                </th>
+                                <th>
+                                    Chairs
+                                </th>
+                                <th>
+                                    Tables
+                                </th>
+                                <th>
+                                    Board Type
+                                </th>
+                                <th>
+                                    Network Access
+                                </th>
+                                <th>
+                                    Telecon System
+                                </th>
+                                <th>
+                                    Projector
+                                </th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.room_cap)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.num_comp)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.num_chairs)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.num_tables)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.board_typ)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.network_ind)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.telecon_sys)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.proj_ind)
+                                </td>
+                            </tr>
 
+                        </table>
+                        <div id="panorama">
+                            <script>
+                                pannellum.viewer('panorama', {
+                                    "type": "equirectangular",
+                                    "panorama": "../../Content/Images/sample2.jpg"
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </body>
 </html>
+

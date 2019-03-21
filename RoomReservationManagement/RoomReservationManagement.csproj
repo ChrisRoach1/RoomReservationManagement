@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="GeneralClasses\DateTimeHelper.cs" />
     <Compile Include="GeneralClasses\EmailHelper.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Rooms\Index.cshtml" />
+    <Content Include="Views\Reservation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

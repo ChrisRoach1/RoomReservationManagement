@@ -9,12 +9,12 @@ namespace RoomReservationManagement.Controllers
 {
     public class RoomsController : Controller
     {
-        public ApplicationDbContext databaseConnection = new ApplicationDbContext();
+        public DataOperations dataOps = new DataOperations();
 
         // GET: Rooms
         public ActionResult Index()
         {
-            var roomData = databaseConnection.Res_Rooms;
+            var roomData = dataOps.getAllRooms();
             return View(roomData);
         }
     }

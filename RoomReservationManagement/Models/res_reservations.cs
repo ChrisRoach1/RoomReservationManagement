@@ -20,20 +20,24 @@ namespace RoomReservationManagement.Models
         public DateTime res_dt { get; set; }
 
         [Required]
+        [Display(Name = "Start Time")]
         public DateTime res_start { get; set; }
 
         [Required]
+        [Display(Name = "End Time")]
         public DateTime res_end { get; set; }
 
         [ForeignKey("Res_Rooms")]
+        [Display(Name = "Room")]
         public int room_id { get; set; }
 
         [Required]
+        [Display(Name = "Your Name")]
         public string res_name { get; set; }
 
         public string cat_ind { get; set; }
 
-
+        [Display(Name = "Catering Order")]
         public string cat_order { get; set; }
 
         public int ver_code { get; set; }

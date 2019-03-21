@@ -45,8 +45,9 @@ a, a:hover, a:focus {
 
     #sidebar ul.components {
         padding: 20px 0;
-        text-align:left;
-        margin-left:10px;
+        text-align:center;
+
+        
     }
 
 

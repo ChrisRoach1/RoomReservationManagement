@@ -48,6 +48,9 @@
                     <li>
                         @Html.ActionLink("Rooms", "Index", "Rooms")
                     </li>
+                    <li>
+                        @Html.ActionLink("Reserve", "makeReservation", "Reservation")
+                    </li>
                 }
 
                 @if (User.IsInRole("RR_Admin"))

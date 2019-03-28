@@ -38,6 +38,10 @@ namespace RoomReservationManagement.Controllers
             return View();
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
 
 
         public List<events> getEventDates()

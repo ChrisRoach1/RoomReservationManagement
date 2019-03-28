@@ -8,13 +8,14 @@
 <h2>Reserve a Room</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("makeReservation", "Reservation",FormMethod.Post,new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <hr />
 
     <div class="form-horizontal">
 
+        <h3 id="ReservationErrorMessage">@ViewBag.errorMessage</h3>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
@@ -36,16 +37,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.res_start, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.res_start, new { htmlAttributes = new { @class = "form-control timepicker", name = "start" } })
+                @*@{ Html.EnableClientValidation(false);}*@
+                @Html.EditorFor(model => model.res_start, new { htmlAttributes = new { @data_val = "false", @class = "form-control timepicker", name = "start"}})
+                @Html.ValidationMessageFor(model => model.res_start, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.res_end, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.res_end, new { htmlAttributes = new { @class = "form-control timepicker", name = "end" } })
+                @Html.EditorFor(model => model.res_end, new { htmlAttributes = new { @data_val = "false", @class = "form-control timepicker", name = "end" } })
+                @Html.ValidationMessageFor(model => model.res_end, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
 
 
         <div class="form-group">

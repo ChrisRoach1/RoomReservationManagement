@@ -158,7 +158,7 @@ namespace RoomReservationManagement.Controllers
             //string end = "11:35:34 PM";
             //DateTime test = Convert.ToDateTime(sample, CultureInfo.InvariantCulture);
 
-            email.sendEmail("c.roach10@yahoo.com", "hello this is a message test", "test email");
+            //email.sendEmail("c.roach10@yahoo.com", "hello this is a message test", "test email");
             //string date = "9/24/2017";
             //string time = "10:31:34 PM";
             //DateTimeHelper dtHelper = new DateTimeHelper();

@@ -54,6 +54,13 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+        public List<res_reservations> getReservationWithStartTime(DateTime startTime, DateTime endTime, int roomId)
+        {
+            List<res_reservations> reservationList = new List<res_reservations>();
+            reservationList = databaseConnection.Res_Reservations.Where(r => ((r.res_start <= startTime && r.res_end >= startTime) || (r.res_start <= endTime && r.res_end >= endTime)) && r.room_id == roomId).ToList();
+            return reservationList;
+        }
+
 
         #endregion res_reservation CRUD
 

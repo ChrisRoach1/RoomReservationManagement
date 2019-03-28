@@ -15,11 +15,12 @@ namespace RoomReservationManagement.Controllers
 
         public DataOperations dataOps = new DataOperations();
         public ErrorLogging errorLog = new ErrorLogging();
-
+        
         
         public ActionResult makeReservation()
         {
-            if((User.IsInRole("RR_Manager") || User.IsInRole("RR_Admin") || User.IsInRole("RR_Secretary")) && Request.IsAuthenticated)
+            SecurityCheck secCheck = new SecurityCheck();
+            if(secCheck.isVerified())
             {
                 ViewBag.roomList = dataOps.getAllRooms();
                 ViewBag.errorMessage = "";
@@ -31,12 +32,16 @@ namespace RoomReservationManagement.Controllers
             }
         }
 
-
+        /*
+         * Need to add in the email functionality at a later point*****
+         */
         [HttpPost]
         public ActionResult makeReservation(res_reservations reservation)
         {
             DateTimeHelper dtHelper = new DateTimeHelper();
             VerificationCodeGenerator codeGen = new VerificationCodeGenerator();
+            SecurityCheck secCheck = new SecurityCheck();
+
             DateTime startTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_start));
             DateTime endTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_end));
             List<res_reservations> roomsInTimeRange = dataOps.getReservationWithStartTime(startTime, endTime, reservation.room_id);
@@ -51,13 +56,12 @@ namespace RoomReservationManagement.Controllers
                 reservation.cat_ind = "n";
             }
       
-            if((User.IsInRole("RR_Manager") || User.IsInRole("RR_Admin") || User.IsInRole("RR_Secretary")) && Request.IsAuthenticated)
+            if (secCheck.isVerified())
             {
                 try
                 {
                     if (roomsInTimeRange.Count == 0)
                     {
-
                         reservation.void_ind = "n";
                         reservation.user_id = User.Identity.GetUserId();
                         reservation.res_start = startTime;

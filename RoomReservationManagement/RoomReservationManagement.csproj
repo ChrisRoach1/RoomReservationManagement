@@ -196,6 +196,7 @@
     <Compile Include="GeneralClasses\DateTimeHelper.cs" />
     <Compile Include="GeneralClasses\EmailHelper.cs" />
     <Compile Include="GeneralClasses\ErrorLogging.cs" />
+    <Compile Include="GeneralClasses\SecurityCheck.cs" />
     <Compile Include="GeneralClasses\VerificationCodeGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

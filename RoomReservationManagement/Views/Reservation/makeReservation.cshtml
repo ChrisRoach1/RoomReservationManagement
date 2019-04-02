@@ -37,7 +37,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.res_start, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@{ Html.EnableClientValidation(false);}*@
                 @Html.EditorFor(model => model.res_start, new { htmlAttributes = new { @data_val = "false", @class = "form-control timepicker", name = "start"}})
                 @Html.ValidationMessageFor(model => model.res_start, "", new { @class = "text-danger" })
             </div>

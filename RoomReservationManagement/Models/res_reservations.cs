@@ -51,6 +51,8 @@ namespace RoomReservationManagement.Models
         [Required]
         public string reject_ind { get; set; }
 
+        public DateTime audit_create_dt { get; set; }
+
         [Required]
         public string void_ind { get; set; }
 

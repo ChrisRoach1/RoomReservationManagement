@@ -15,12 +15,11 @@ namespace RoomReservationManagement.Controllers
 
         public DataOperations dataOps = new DataOperations();
         public ErrorLogging errorLog = new ErrorLogging();
-        
-        
+
         public ActionResult makeReservation()
         {
             SecurityCheck secCheck = new SecurityCheck();
-            if(secCheck.isVerified())
+            if (secCheck.isVerified())
             {
                 ViewBag.roomList = dataOps.getAllRooms();
                 ViewBag.errorMessage = "";
@@ -41,12 +40,12 @@ namespace RoomReservationManagement.Controllers
             DateTimeHelper dtHelper = new DateTimeHelper();
             VerificationCodeGenerator codeGen = new VerificationCodeGenerator();
             SecurityCheck secCheck = new SecurityCheck();
-
+            DateTime currentTime = DateTime.Now;
             DateTime startTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_start));
             DateTime endTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_end));
             List<res_reservations> roomsInTimeRange = dataOps.getReservationWithStartTime(startTime, endTime, reservation.room_id);
 
-            if(!String.IsNullOrEmpty(reservation.cat_order))
+            if (!String.IsNullOrEmpty(reservation.cat_order))
             {
                 reservation.cat_ind = "y";
                 reservation.ver_code = codeGen.getVerificationCode();
@@ -55,7 +54,7 @@ namespace RoomReservationManagement.Controllers
             {
                 reservation.cat_ind = "n";
             }
-      
+
             if (secCheck.isVerified())
             {
                 try
@@ -70,6 +69,7 @@ namespace RoomReservationManagement.Controllers
                         reservation.approved_ind = "n";
                         reservation.reject_ind = "n";
                         reservation.pending_ind = "y";
+                        reservation.audit_create_dt = Convert.ToDateTime(currentTime.ToString("yyyy-MM-dd H:mm:ss"));
 
                         dataOps.addReservation(reservation);
                         ViewBag.errorMessage = "";
@@ -81,7 +81,8 @@ namespace RoomReservationManagement.Controllers
                         ViewBag.roomList = dataOps.getAllRooms();
                         return View(reservation);
                     }
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Reservation", "makeReservation", e.Message);
                     return RedirectToAction("Error", "Home");

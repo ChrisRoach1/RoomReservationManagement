@@ -233,7 +233,6 @@ C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.pdb
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Google.Protobuf.dll
 C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\bin\Google.Protobuf.xml
-C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csprojAssemblyReference.cache
 C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservationManagement\bin\RoomReservationManagement.dll.config
 C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservationManagement\bin\RoomReservationManagement.dll
 C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservationManagement\bin\RoomReservationManagement.pdb
@@ -353,3 +352,4 @@ C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservation
 C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csproj.CopyComplete
 C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.dll
 C:\Users\Gabe\Documents\Schoolwork\Cap\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.pdb
+C:\Users\croac\Documents\RoomReservationManagement\RoomReservationManagement\obj\Debug\RoomReservationManagement.csprojAssemblyReference.cache

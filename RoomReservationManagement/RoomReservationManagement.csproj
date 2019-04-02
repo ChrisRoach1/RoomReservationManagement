@@ -192,6 +192,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="GeneralClasses\DateTimeHelper.cs" />
     <Compile Include="GeneralClasses\EmailHelper.cs" />
@@ -370,6 +371,9 @@
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Reservation\makeReservation.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Review\Details.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Review\TestSandbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

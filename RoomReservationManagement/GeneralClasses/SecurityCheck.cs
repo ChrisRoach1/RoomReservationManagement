@@ -14,7 +14,7 @@ namespace RoomReservationManagement.GeneralClasses
     {
 
 
-        public Boolean isVerified()
+        public Boolean hasFullAccess()
         {
 
             if((HttpContext.Current.User.IsInRole("RR_Manager") ||
@@ -28,6 +28,48 @@ namespace RoomReservationManagement.GeneralClasses
                 return false;
             }
             
+        }
+
+        public Boolean hasManagerAccess()
+        {
+
+            if (HttpContext.Current.User.IsInRole("RR_Manager") && HttpContext.Current.Request.IsAuthenticated)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public Boolean hasAdminAccess()
+        {
+
+            if (HttpContext.Current.User.IsInRole("RR_Admin") && HttpContext.Current.Request.IsAuthenticated)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public Boolean hasSecretaryAccess()
+        {
+
+            if (HttpContext.Current.User.IsInRole("RR_Secretary") && HttpContext.Current.Request.IsAuthenticated)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
 

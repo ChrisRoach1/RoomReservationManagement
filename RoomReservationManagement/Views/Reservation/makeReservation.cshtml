@@ -8,7 +8,7 @@
 <h2>Reserve a Room</h2>
 
 
-@using (Html.BeginForm("makeReservation", "Reservation",FormMethod.Post,new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("makeReservation", "Reservation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <hr />
@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.res_start, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.res_start, new { htmlAttributes = new { @data_val = "false", @class = "form-control timepicker", name = "start"}})
+                @Html.EditorFor(model => model.res_start, new { htmlAttributes = new { @data_val = "false", @class = "form-control timepicker", name = "start" } })
                 @Html.ValidationMessageFor(model => model.res_start, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.room_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.room_id,new SelectList(ViewBag.roomList, "room_id", "room_name"), new { @class="form-control"})
+                @Html.DropDownListFor(model => model.room_id, new SelectList(ViewBag.roomList, "room_id", "room_name"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.room_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,8 +78,6 @@
             </div>
         </div>
 
-
-
         <div class="form-group" style="margin-top: 30px;">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-secondary" />
@@ -88,6 +86,19 @@
     </div>
 }
 
+@if (ViewBag.successValue)
+{
+    //used to display success message after a reservation is made
+    <script>
+        Swal.fire(
+            'Success!',
+            'Your reservation has been made and is pending approval.',
+            'success'
+        ).then((result) => {
+            window.location = '/';
+        })
+    </script>
+}
 
 
 <script>

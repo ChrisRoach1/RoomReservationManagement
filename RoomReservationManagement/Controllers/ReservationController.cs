@@ -21,8 +21,9 @@ namespace RoomReservationManagement.Controllers
             SecurityCheck secCheck = new SecurityCheck();
             if (secCheck.isVerified())
             {
-                ViewBag.roomList = dataOps.getAllRooms();
                 ViewBag.errorMessage = "";
+                ViewBag.successValue = false;
+                ViewBag.roomList = dataOps.getAllRooms();
                 return View();
             }
             else
@@ -73,11 +74,16 @@ namespace RoomReservationManagement.Controllers
 
                         dataOps.addReservation(reservation);
                         ViewBag.errorMessage = "";
-                        return RedirectToAction("Index", "Home");
+                        ViewBag.successValue = true;
+                        ViewBag.roomList = dataOps.getAllRooms();
+                        //return RedirectToAction("Index", "Home");
+                        return View();
+
                     }
                     else
                     {
                         ViewBag.errorMessage = "This time is already reserved!";
+                        ViewBag.successValue = false;
                         ViewBag.roomList = dataOps.getAllRooms();
                         return View(reservation);
                     }

@@ -54,7 +54,7 @@ namespace RoomReservationManagement.Controllers
             {
                 string start = eventDate.res_start.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
                 string end = eventDate.res_end.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
-                string backgroundColor = (eventDate.approved_ind == "y" ? "green" : "orange");
+                string backgroundColor = (eventDate.approved_ind == "y" ? "lime" : "orange");
                 eventList.eList.Add(new events
                 {
                     start = start,

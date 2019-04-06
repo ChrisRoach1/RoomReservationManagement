@@ -33,7 +33,7 @@ namespace RoomReservationManagement.GeneralClasses
         public Boolean hasManagerAccess()
         {
 
-            if (HttpContext.Current.User.IsInRole("RR_Manager") && HttpContext.Current.Request.IsAuthenticated)
+            if ((HttpContext.Current.User.IsInRole("RR_Manager") || HttpContext.Current.User.IsInRole("RR_Admin")) && HttpContext.Current.Request.IsAuthenticated)
             {
                 return true;
             }
@@ -61,7 +61,7 @@ namespace RoomReservationManagement.GeneralClasses
         public Boolean hasSecretaryAccess()
         {
 
-            if (HttpContext.Current.User.IsInRole("RR_Secretary") && HttpContext.Current.Request.IsAuthenticated)
+            if ((HttpContext.Current.User.IsInRole("RR_Secretary") || HttpContext.Current.User.IsInRole("RR_Admin")) && HttpContext.Current.Request.IsAuthenticated)
             {
                 return true;
             }

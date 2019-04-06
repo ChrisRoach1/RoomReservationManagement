@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="Controllers\SecretaryController.cs" />
     <Compile Include="GeneralClasses\DateTimeHelper.cs" />
     <Compile Include="GeneralClasses\EmailHelper.cs" />
     <Compile Include="GeneralClasses\ErrorLogging.cs" />
@@ -374,6 +375,7 @@
     <Content Include="Views\Review\Details.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\Review\TestSandbox.cshtml" />
+    <Content Include="Views\Secretary\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,7 +19,7 @@ namespace RoomReservationManagement.Controllers
         public ActionResult makeReservation()
         {
             SecurityCheck secCheck = new SecurityCheck();
-            if (secCheck.isVerified())
+            if (secCheck.hasFullAccess())
             {
                 ViewBag.errorMessage = "";
                 ViewBag.successValue = false;
@@ -41,27 +41,36 @@ namespace RoomReservationManagement.Controllers
             DateTimeHelper dtHelper = new DateTimeHelper();
             VerificationCodeGenerator codeGen = new VerificationCodeGenerator();
             SecurityCheck secCheck = new SecurityCheck();
+            EmailHelper emailHelper = new EmailHelper();
+
+            res_rooms chosenRoom = dataOps.getRoom(reservation.room_id);
             DateTime currentTime = DateTime.Now;
             DateTime startTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_start));
             DateTime endTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_end));
             List<res_reservations> roomsInTimeRange = dataOps.getReservationWithStartTime(startTime, endTime, reservation.room_id);
+            string secretaryEmailAddr = dataOps.getSecretaryEmail();
+            string emailBody = "There is a pending reservation for " + startTime.ToLongDateString() + " " + startTime.ToLongTimeString() + " to " + endTime.ToLongDateString() + " " + endTime.ToLongTimeString() + " for room: " + chosenRoom.room_name;
+
 
             if (!String.IsNullOrEmpty(reservation.cat_order))
             {
                 reservation.cat_ind = "y";
                 reservation.ver_code = codeGen.getVerificationCode();
+                emailBody = emailBody + "\n" + " Catering order: " +  " \" " + reservation.cat_order + "\""  + " Catering verification code: " + reservation.ver_code;
             }
             else
             {
                 reservation.cat_ind = "n";
             }
 
-            if (secCheck.isVerified())
+            if (secCheck.hasFullAccess())
             {
                 try
                 {
                     if (roomsInTimeRange.Count == 0)
                     {
+                        //setting the remaining reservation attributes, dont want to do it before hand just 
+                        //in case the time slot is already in use.
                         reservation.void_ind = "n";
                         reservation.user_id = User.Identity.GetUserId();
                         reservation.res_start = startTime;
@@ -75,8 +84,8 @@ namespace RoomReservationManagement.Controllers
                         dataOps.addReservation(reservation);
                         ViewBag.errorMessage = "";
                         ViewBag.successValue = true;
+                        emailHelper.sendEmail(secretaryEmailAddr,emailBody, "Pending Reservation");
                         ViewBag.roomList = dataOps.getAllRooms();
-                        //return RedirectToAction("Index", "Home");
                         return View();
 
                     }

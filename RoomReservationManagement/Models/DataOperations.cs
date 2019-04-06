@@ -28,6 +28,13 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+        public string getSecretaryEmail()
+        {
+            res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "Reservation Secretary").SingleOrDefault();
+           
+            return email.email_addr;
+        }
+
         #endregion email_ref CRUD
 
         #region res_reservation CRUD
@@ -54,6 +61,13 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+        public List<res_reservations> getAllPendingReservations()
+        {
+            List<res_reservations> reservationList = new List<res_reservations>();
+            reservationList = databaseConnection.Res_Reservations.Where(r => r.pending_ind == "y" && r.approved_ind == "n").ToList();
+            return reservationList;
+        }
+
         public List<res_reservations> getReservationWithStartTime(DateTime startTime, DateTime endTime, int roomId)
         {
             List<res_reservations> reservationList = new List<res_reservations>();
@@ -61,6 +75,27 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+        public int rejectReservation(int res_id)
+        {
+            res_reservations tempRes = databaseConnection.Res_Reservations.SingleOrDefault(r => r.res_id == res_id);
+            tempRes.reject_ind = "y";
+            tempRes.pending_ind = "n";
+            tempRes.approved_ind = "n";
+            databaseConnection.SaveChanges();
+
+            return 1;
+        }
+
+        public int approveReservation(int res_id)
+        {
+            res_reservations tempRes = databaseConnection.Res_Reservations.SingleOrDefault(r => r.res_id == res_id);
+            tempRes.reject_ind = "n";
+            tempRes.pending_ind = "n";
+            tempRes.approved_ind = "y";
+            databaseConnection.SaveChanges();
+
+            return 1;
+        }
 
         #endregion res_reservation CRUD
 
@@ -112,6 +147,11 @@ namespace RoomReservationManagement.Models
             List<res_rooms> roomList = new List<res_rooms>();
             roomList = databaseConnection.Res_Rooms.ToList();
             return roomList;
+        }
+
+        public res_rooms getRoom(int id)
+        {
+            return databaseConnection.Res_Rooms.Where(r => r.room_id == id).SingleOrDefault();
         }
 
         #endregion res_rooms CRUD

@@ -23,7 +23,7 @@ namespace RoomReservationManagement.Controllers
             {
                 ViewBag.errorMessage = "";
                 ViewBag.successValue = false;
-                ViewBag.roomList = dataOps.getAllRooms();
+                ViewBag.roomList = dataOps.getAllAvailableRooms();
                 return View();
             }
             else
@@ -33,8 +33,8 @@ namespace RoomReservationManagement.Controllers
         }
 
         /*
-         * Need to add in the email functionality at a later point*****
-         */
+         * Need to format email body string, add who made the reservation and the associated account
+         */ 
         [HttpPost]
         public ActionResult makeReservation(res_reservations reservation)
         {
@@ -85,7 +85,7 @@ namespace RoomReservationManagement.Controllers
                         ViewBag.errorMessage = "";
                         ViewBag.successValue = true;
                         emailHelper.sendEmail(secretaryEmailAddr,emailBody, "Pending Reservation");
-                        ViewBag.roomList = dataOps.getAllRooms();
+                        ViewBag.roomList = dataOps.getAllAvailableRooms();
                         return View();
 
                     }
@@ -93,7 +93,7 @@ namespace RoomReservationManagement.Controllers
                     {
                         ViewBag.errorMessage = "This time is already reserved!";
                         ViewBag.successValue = false;
-                        ViewBag.roomList = dataOps.getAllRooms();
+                        ViewBag.roomList = dataOps.getAllAvailableRooms();
                         return View(reservation);
                     }
                 }

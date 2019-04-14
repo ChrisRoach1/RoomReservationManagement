@@ -149,9 +149,32 @@ namespace RoomReservationManagement.Models
             return roomList;
         }
 
+        public List<res_rooms> getAllAvailableRooms()
+        {
+            List<res_rooms> roomList = new List<res_rooms>();
+            roomList = databaseConnection.Res_Rooms.Where(r => r.void_ind == "n").ToList();
+            return roomList;
+        }
+
         public res_rooms getRoom(int id)
         {
             return databaseConnection.Res_Rooms.Where(r => r.room_id == id).SingleOrDefault();
+        }
+
+        public int disableRoom(int id)
+        {
+            res_rooms tempRoom = databaseConnection.Res_Rooms.SingleOrDefault(r => r.room_id == id);
+            tempRoom.void_ind = "y";
+            databaseConnection.SaveChanges();
+            return 1;
+        }
+
+        public int enableRoom(int id)
+        {
+            res_rooms tempRoom = databaseConnection.Res_Rooms.SingleOrDefault(r => r.room_id == id);
+            tempRoom.void_ind = "n";
+            databaseConnection.SaveChanges();
+            return 1;
         }
 
         #endregion res_rooms CRUD

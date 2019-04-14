@@ -19,6 +19,8 @@ namespace RoomReservationManagement.GeneralClasses
         {
             try
             {
+
+               
                 MailMessage mail = new MailMessage("Batemandonotreply@gmail.com", toAddress);
                 SmtpClient client = new SmtpClient();
                 client.Host = "smtp.gmail.com";

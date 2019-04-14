@@ -48,6 +48,7 @@
     }
 
 <td>
+    @Html.ActionLink("Edit", "EditRoom", new { id = item.room_id }, new { @class = "btn btn btn-info" })
     @Html.ActionLink("Enable", "EnableRoom", new { id = item.room_id }, new { @class = "btn btn btn-success" })
     @Html.ActionLink("Disable", "DisableRoom", new { id = item.room_id }, new { @class = "btn btn btn-danger" })
 </td>

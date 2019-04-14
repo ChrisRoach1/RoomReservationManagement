@@ -14,7 +14,7 @@ namespace RoomReservationManagement.Controllers
         public DataOperations dataOps = new DataOperations();
         public SecurityCheck secCheck = new SecurityCheck();
         public ErrorLogging errorLog = new ErrorLogging();
-
+        
         public class indicatorItem
         {
             public string display { get; set; }
@@ -54,39 +54,43 @@ namespace RoomReservationManagement.Controllers
         public ActionResult AddNewRoom(res_rooms room)
         {
 
-           
-
-            if (ModelState.IsValid)
+            if (secCheck.hasAdminAccess())
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    room.void_ind = "n";
-                    dataOps.addRoom(room);
-                    ViewBag.successValue = true;
+                    try
+                    {
+                        room.void_ind = "n";
+                        dataOps.addRoom(room);
+                        ViewBag.successValue = true;
+                        List<indicatorItem> indicatorValues = new List<indicatorItem>();
+                        indicatorValues.Add(new indicatorItem { display = "Yes", sourceValue = "y" });
+                        indicatorValues.Add(new indicatorItem { display = "No", sourceValue = "n" });
+                        ViewBag.indicators = indicatorValues;
+                        return View();
+
+                    }
+                    catch (Exception e)
+                    {
+                        errorLog.log_error("Room Reservation Management", "Admin", "AddNewRoom", e.Message);
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                }
+                else
+                {
+                    ViewBag.successValue = false;
                     List<indicatorItem> indicatorValues = new List<indicatorItem>();
                     indicatorValues.Add(new indicatorItem { display = "Yes", sourceValue = "y" });
                     indicatorValues.Add(new indicatorItem { display = "No", sourceValue = "n" });
                     ViewBag.indicators = indicatorValues;
-                    return View();
-
+                    return View(room);
                 }
-                catch(Exception e)
-                {
-                    errorLog.log_error("Room Reservation Management", "Admin", "AddNewRoom", e.Message);
-                    return RedirectToAction("Error", "Home");
-                }
-
             }
             else
             {
-                ViewBag.successValue = false;
-                List<indicatorItem> indicatorValues = new List<indicatorItem>();
-                indicatorValues.Add(new indicatorItem { display = "Yes", sourceValue = "y" });
-                indicatorValues.Add(new indicatorItem { display = "No", sourceValue = "n" });
-                ViewBag.indicators = indicatorValues;
-                return View(room);
+                return RedirectToAction("Index", "Home");
             }
-
         }
 
         public ActionResult EnableRoom(int id)
@@ -125,6 +129,66 @@ namespace RoomReservationManagement.Controllers
                     errorLog.log_error("Room Reservation Management", "Admin", "DisableRoom", e.Message);
                     return RedirectToAction("Error", "Home");
                 }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult EditRoom(int id)
+        {
+            if (secCheck.hasAdminAccess())
+            {
+                res_rooms room = dataOps.getRoom(id);
+                ViewBag.successValue = false;
+                List<indicatorItem> indicatorValues = new List<indicatorItem>();
+                indicatorValues.Add(new indicatorItem { display = "Yes", sourceValue = "y" });
+                indicatorValues.Add(new indicatorItem { display = "No", sourceValue = "n" });
+                ViewBag.indicators = indicatorValues;
+                return View(room);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult EditRoom(res_rooms room)
+        {
+            if (secCheck.hasAdminAccess())
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        dataOps.updateRoom(room);
+                        ViewBag.successValue = true;
+                        List<indicatorItem> indicatorValues = new List<indicatorItem>();
+                        indicatorValues.Add(new indicatorItem { display = "Yes", sourceValue = "y" });
+                        indicatorValues.Add(new indicatorItem { display = "No", sourceValue = "n" });
+                        ViewBag.indicators = indicatorValues;
+                        return View();
+
+                    }
+                    catch (Exception e)
+                    {
+                        errorLog.log_error("Room Reservation Management", "Admin", "EditRoom", e.Message);
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    ViewBag.successValue = false;
+                    List<indicatorItem> indicatorValues = new List<indicatorItem>();
+                    indicatorValues.Add(new indicatorItem { display = "Yes", sourceValue = "y" });
+                    indicatorValues.Add(new indicatorItem { display = "No", sourceValue = "n" });
+                    ViewBag.indicators = indicatorValues;
+                    return View(room);
+                }
+
             }
             else
             {

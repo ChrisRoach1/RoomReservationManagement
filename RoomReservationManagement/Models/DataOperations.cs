@@ -137,7 +137,17 @@ namespace RoomReservationManagement.Models
         public int updateRoom(res_rooms room)
         {
             res_rooms oldRoom = databaseConnection.Res_Rooms.Where(r => r.room_id == room.room_id).SingleOrDefault();
-            oldRoom = room;
+            
+            oldRoom.room_name = room.room_name;
+            oldRoom.location = room.location;
+            oldRoom.room_cap = room.room_cap;
+            oldRoom.num_comp = room.num_comp;
+            oldRoom.num_chairs = room.num_chairs;
+            oldRoom.num_tables = room.num_tables;
+            oldRoom.board_typ = room.board_typ;
+            oldRoom.network_ind = room.network_ind;
+            oldRoom.telecon_sys = room.telecon_sys;
+            oldRoom.proj_ind = room.proj_ind;
             databaseConnection.SaveChanges();
             return 1;
         }

@@ -7,7 +7,7 @@
 <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
 
 <h1>Rooms</h1>
-<hr/>
+<hr />
 <!DOCTYPE HTML>
 <style>
     .room {
@@ -36,7 +36,6 @@
         width: 600px;
         height: 400px;
     }
-    
 </style>
 <html>
 <head>
@@ -54,11 +53,11 @@
             <div class="room">
                 <h1 style="color:#80D651;">@Html.DisplayFor(modelItem => item.room_name)</h1>
                 <div id="headingOne">
-                    <button class="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="button" data-toggle="collapse" data-target=#@item.room_name aria-expanded="true" aria-controls=@item.room_name>
                         Toggle Details
                     </button>
                 </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id=@item.room_name class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tr>
@@ -122,14 +121,18 @@
                             </tr>
 
                         </table>
+                        @*@if (File.Exists("../../Content/Images/test.jpg"))
+                            {*@
                         <div id="panorama">
                             <script>
                                 pannellum.viewer('panorama', {
                                     "type": "equirectangular",
-                                    "panorama": "../../Content/Images/sample2.jpg"
+                                    "panorama": "../../Content/Images/@item.room_name"+".jpg"
                                 });
                             </script>
                         </div>
+                        @*}*@
+
                     </div>
                 </div>
             </div>

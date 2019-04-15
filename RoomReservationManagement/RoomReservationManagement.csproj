@@ -231,6 +231,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyle.css" />
+    <Content Include="Content\Images\Test Updated.jpg" />
+    <Content Include="Content\Images\Admin. First Floor.jpg" />
     <Content Include="Content\pannellum\pannellum.css" />
     <Content Include="Content\pannellum\pannellum.htm" />
     <Content Include="Content\pannellum\pannellum.js" />
@@ -383,7 +385,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

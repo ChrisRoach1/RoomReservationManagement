@@ -1,10 +1,21 @@
-﻿@model IEnumerable<RoomReservationManagement.Models.res_rooms>
+﻿
+@model IEnumerable<RoomReservationManagement.Models.res_reviews>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script src="../../Content/star-rating-svg-master/dist/jquery.star-rating-svg.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../Content/star-rating-svg-master/src/css/star-rating-svg.css">
+
+
+
+
+
 
 <h1>Room Review TEMP</h1>
 
@@ -38,38 +49,67 @@
     }
 </style>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A simple example</title>
-    <link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
-    <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
-</head>
+
 <body>
 
-    @* @foreach (var item in Model)
-        { *@
-    <div id="accordion">
-        <div class="room">
-            <h1 style="color:#80D651;">Room 123    ★★★★☆</h1>
-            <div id="headingOne">
-                <button class="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Create Review
-                </button>
-            </div>
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                    <table class="table">
-                        <h2>
-                            ☆☆☆☆☆
-                        </h2>
-                        <textarea rows="10" cols="50"></textarea>
-                        <button class="btn btn-default">Submit</button>
-                    </table>
-                </div>
-            </div>
+    <div id="headingOne">
+        <button class="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Create Review
+        </button>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+            <table class="table">
+                <div class="my-rating"></div>
+                <textarea rows="10" cols="50"></textarea>
+                <button class="btn btn-default">Submit</button>
+            </table>
         </div>
     </div>
+
+    <div style="height:10px"> </div>
+
+    @foreach (var item in Model)
+    {
+        <div id="accordion">
+            <div class="room">
+                <h1 style="color:#80D651;">Room @Html.DisplayFor(modelItem => item.room_id)   <div class="my-rating-set"></div></h1>
+                <p>
+                    @Html.DisplayFor(modelItem => item.review)
+                </p>
+                <p>
+                    @Html.DisplayFor(modelItem => item.audit_create_dt)
+                </p>
+            </div>
+        </div>
+
+        <script>
+            $(".my-rating").starRating({
+                starSize: 25,
+                hoverColor: '#4CAF50',
+                ratedColor: 'orange',
+                useGradient: false,
+                disableAfterRate: false,
+                starGradient: {
+                    start: '#FEF7CD',
+                    end: '#FF9511'
+                },
+                callback: function (currentRating, $el) {
+                    // make a server call here
+                }
+            });
+        </script>
+        <script>
+            $(".my-rating-set").starRating({
+                readOnly: true,
+                initialRating: @Html.DisplayFor(modelItem => item.rating),
+                starSize: 25,
+                callback: function (currentRating, $el) {
+                    // make a server call here
+                }
+            });
+        </script>
+    }
 </body>
 </html>
 

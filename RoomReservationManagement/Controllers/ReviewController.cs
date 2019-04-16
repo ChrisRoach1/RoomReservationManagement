@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using RoomReservationManagement.GeneralClasses;
 using RoomReservationManagement.Models;
 
 namespace RoomReservationManagement.Controllers
@@ -11,23 +16,13 @@ namespace RoomReservationManagement.Controllers
     {
         public DataOperations dataOps = new DataOperations();
 
-        // GET: Rooms
+
+        //GET: Reviews
         public ActionResult Index()
         {
-            var roomData = dataOps.getAllRooms();
-            return View(roomData);
+            var revData = dataOps.getAllReviews();
+            return View(revData);
         }
 
-        public ActionResult Details()
-        {
-            var roomData = dataOps.getAllRooms();
-            return View(roomData);
-        }
-
-        public ActionResult TestSandbox()
-        {
-            var roomData = dataOps.getAllRooms();
-            return View(roomData);
-        }
     }
 }

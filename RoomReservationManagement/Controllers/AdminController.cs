@@ -73,7 +73,7 @@ namespace RoomReservationManagement.Controllers
                     catch (Exception e)
                     {
                         errorLog.log_error("Room Reservation Management", "Admin", "AddNewRoom", e.Message);
-                        return RedirectToAction("Error", "Home");
+                        return View("Error");
                     }
 
                 }
@@ -106,7 +106,7 @@ namespace RoomReservationManagement.Controllers
                 catch (Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Admin", "EnableRoom", e.Message);
-                    return RedirectToAction("Error", "Home");
+					return View("Error");
                 }
             }
             else
@@ -127,7 +127,7 @@ namespace RoomReservationManagement.Controllers
                 catch (Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Admin", "DisableRoom", e.Message);
-                    return RedirectToAction("Error", "Home");
+					return View("Error");
                 }
             }
             else
@@ -176,7 +176,7 @@ namespace RoomReservationManagement.Controllers
                     catch (Exception e)
                     {
                         errorLog.log_error("Room Reservation Management", "Admin", "EditRoom", e.Message);
-                        return RedirectToAction("Error", "Home");
+						return View("Error");
                     }
                 }
                 else
@@ -195,5 +195,95 @@ namespace RoomReservationManagement.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-    }
+
+
+		public ActionResult ManageUsers()
+		{
+
+			if (secCheck.hasAdminAccess())
+			{
+				ViewBag.successValue = false;
+				List<ApplicationUser> userList = dataOps.getAllUsers();
+				return View(userList);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		
+		public ActionResult accountDelete(string id)
+		{
+			if (secCheck.hasAdminAccess())
+			{
+				try
+				{
+					dataOps.deleteUserAccount(id);
+					ViewBag.successValue = true;
+					List<ApplicationUser> userList = dataOps.getAllUsers();
+					return RedirectToAction("ManageUsers");
+
+				}
+				catch(Exception e)
+				{
+					errorLog.log_error("Room Reservation Management", "Admin", "accountDelete", e.Message);
+					return View("Error");
+				}
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		
+		public ActionResult accountPasswordChange(string id)
+		{
+			if (secCheck.hasAdminAccess())
+			{
+				PasswordReset tempData = new PasswordReset();
+				tempData.userID = id;
+				tempData.Email = dataOps.getUserEmail(id);
+				ViewBag.successValue = false;
+				return View(tempData);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpPost]
+		public ActionResult accountPasswordChange(PasswordReset reset)
+		{
+			if (secCheck.hasAdminAccess())
+			{
+				if (ModelState.IsValid)
+				{
+					try
+					{
+						dataOps.updateUserPassword(reset);
+						ViewBag.successValue = true;
+						return View();
+
+					}
+					catch(Exception e)
+					{
+						errorLog.log_error("Room Reservation Management", "Admin", "accountPasswordChange", e.Message);
+						return View("Error");
+					}
+				}
+				else
+				{
+					ViewBag.successValue = false;
+					return View(reset);
+				}
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+	}
 }

@@ -43,7 +43,7 @@ namespace RoomReservationManagement.Controllers
                 }catch(Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Secretary", "reject", e.Message);
-                    return RedirectToAction("Error", "Home");
+					return View("Error");
                 }
 
             }
@@ -65,7 +65,7 @@ namespace RoomReservationManagement.Controllers
                 catch (Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Secretary", "approve", e.Message);
-                    return RedirectToAction("Error", "Home");
+					return View("Error");
                 }
 
             }

@@ -152,32 +152,6 @@ namespace RoomReservationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            EmailHelper email = new EmailHelper();
-            //string sample = "9/24/2017 10:31 PM";
-            //string start = "10:31:34 PM";
-            //string end = "11:35:34 PM";
-            //DateTime test = Convert.ToDateTime(sample, CultureInfo.InvariantCulture);
-
-            //email.sendEmail("c.roach10@yahoo.com", "hello this is a message test", "test email");
-            //string date = "9/24/2017";
-            //string time = "10:31:34 PM";
-            //DateTimeHelper dtHelper = new DateTimeHelper();
-            //VerificationCodeGenerator generator = new VerificationCodeGenerator();
-            //error_log test = new error_log();
-            //test = db.Error_Logs.Where(e => e.log_id == 5).SingleOrDefault();
-            //string dateTest = dtHelper.convertStampToDateString(test.audit_create_dt.Date);
-            //string timeTest = dtHelper.convertStampToTimeString(test.audit_create_dt);
-            //DateTime tester = dtHelper.convertStringToDatetime(date, time);
-            //DateTime tester1 = dtHelper.convertDateStringToDatetime(date);
-            //int codeTest = generator.getVerificationCode();
-            //error_log addtest = new error_log();
-            //addtest.audit_create_dt = tester;
-            //addtest.app_name = "test";
-            //addtest.controller = "register";
-            //addtest.error_mes = "testing times";
-            //addtest.method_name = "register";
-            //db.Error_Logs.Add(addtest);
-            //db.SaveChanges();
 
             if (ModelState.IsValid)
             {

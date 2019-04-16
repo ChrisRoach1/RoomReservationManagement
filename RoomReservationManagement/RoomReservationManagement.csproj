@@ -216,6 +216,8 @@
     <Compile Include="Models\events.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PasswordReset.cs" />
+    <Compile Include="Models\RequestRegister.cs" />
     <Compile Include="Models\res_email_ref.cs" />
     <Compile Include="Models\res_reservations.cs" />
     <Compile Include="Models\res_reviews.cs" />
@@ -231,6 +233,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyle.css" />
+    <Content Include="Content\Images\sample.jpg" />
+    <Content Include="Content\Images\sample2.jpg" />
     <Content Include="Content\Images\Test Updated.jpg" />
     <Content Include="Content\Images\Admin. First Floor.jpg" />
     <Content Include="Content\pannellum\pannellum.css" />
@@ -371,7 +375,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Reservation\makeReservation.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
@@ -382,6 +385,11 @@
     <Content Include="Views\Admin\ManageRooms.cshtml" />
     <Content Include="Views\Admin\AddNewRoom.cshtml" />
     <Content Include="Views\Admin\EditRoom.cshtml" />
+    <Content Include="Views\Home\RequestRegister.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\accountRoleChange.cshtml" />
+    <Content Include="Views\Admin\accountPasswordChange.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

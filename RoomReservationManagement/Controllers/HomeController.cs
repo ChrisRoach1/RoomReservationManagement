@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RoomReservationManagement.Models;
+using RoomReservationManagement.GeneralClasses;
 
 namespace RoomReservationManagement.Controllers
 {
@@ -43,8 +44,38 @@ namespace RoomReservationManagement.Controllers
             return View();
         }
 
+		public ActionResult RequestRegister()
+		{
+			ViewBag.successValue = false;
+			return View();
+			
+		}
 
-        public List<events> getEventDates()
+		[HttpPost]
+		public ActionResult RequestRegister(RequestRegister request)
+		{
+			DataOperations dataOps = new DataOperations();
+			EmailHelper emailHelper = new EmailHelper();
+
+			string AdminEmail = dataOps.getAdminEmail();
+			string body;
+			
+
+			if (ModelState.IsValid)
+			{
+				body = request.Name + ", email address: " + request.email + " has requested an account for the following reason(s): " + request.reqReason;
+				emailHelper.sendEmail(AdminEmail, body, "Room Reservation Request");
+				ViewBag.successValue = true;
+				return View();
+			}
+			else
+			{
+				return View(request);
+				ViewBag.successValue = false;
+			}
+		}
+
+		public List<events> getEventDates()
         { 
             DateTime today = DateTime.Now.Date;
             eventList eventList = new eventList();

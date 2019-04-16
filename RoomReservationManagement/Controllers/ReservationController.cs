@@ -100,7 +100,7 @@ namespace RoomReservationManagement.Controllers
                 catch (Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Reservation", "makeReservation", e.Message);
-                    return RedirectToAction("Error", "Home");
+                    return View("Error");
                 }
             }
             else

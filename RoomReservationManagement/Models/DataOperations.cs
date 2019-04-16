@@ -2,25 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using RoomReservationManagement.Models;
-
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Host.SystemWeb;
+using System.Web.Mvc;
+using Microsoft.Owin.Security;
+using RoomReservationManagement.GeneralClasses;
 
 namespace RoomReservationManagement.Models
 {
     public class DataOperations
     {
-        /*
+		/*
          *Class is used to abstract data manipulation.
          * This way controllers do not get cluttered with CRUD logic.
          * Also will easily allow for error catching/handling.
          */
 
+		private ApplicationUserManager _userManager;
+		public ApplicationDbContext databaseConnection = new ApplicationDbContext();
 
-        public ApplicationDbContext databaseConnection = new ApplicationDbContext();
+		public ApplicationUserManager UserManager
+		{
+			get
+			{
+				return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+			}
+			private set
+			{
+				_userManager = value;
+			}
+		}
 
-        #region email_ref CRUD
+		#region email_ref CRUD
 
-        public int updateEmail(res_email_ref email)
+		public int updateEmail(res_email_ref email)
         {
             res_email_ref oldEntry = databaseConnection.Res_Email_refs.Where(e => e.position == email.position).SingleOrDefault();
             oldEntry.email_addr = email.email_addr;
@@ -35,11 +52,19 @@ namespace RoomReservationManagement.Models
             return email.email_addr;
         }
 
-        #endregion email_ref CRUD
+		public string getAdminEmail()
+		{
+			res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "IT Admin").SingleOrDefault();
 
-        #region res_reservation CRUD
+			return email.email_addr;
+		}
 
-        public int addReservation(res_reservations reservation)
+
+		#endregion email_ref CRUD
+
+		#region res_reservation CRUD
+
+		public int addReservation(res_reservations reservation)
         {
             databaseConnection.Res_Reservations.Add(reservation);
             databaseConnection.SaveChanges();
@@ -71,7 +96,7 @@ namespace RoomReservationManagement.Models
         public List<res_reservations> getReservationWithStartTime(DateTime startTime, DateTime endTime, int roomId)
         {
             List<res_reservations> reservationList = new List<res_reservations>();
-            reservationList = databaseConnection.Res_Reservations.Where(r => ((r.res_start <= startTime && r.res_end >= startTime) || (r.res_start <= endTime && r.res_end >= endTime)) && r.room_id == roomId).ToList();
+            reservationList = databaseConnection.Res_Reservations.Where(r => ((r.res_start <= startTime && r.res_end >= startTime) || (r.res_start <= endTime && r.res_end >= endTime)) && r.room_id == roomId && r.reject_ind == "n" && r.void_ind == "n").ToList();
             return reservationList;
         }
 
@@ -187,7 +212,61 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
-        #endregion res_rooms CRUD
+		#endregion res_rooms CRUD
 
-    }
+
+		#region Users
+		public List<ApplicationUser> getAllUsers()
+		{
+			return databaseConnection.Users.ToList();
+		}
+
+		public int deleteUserAccount(string id)
+		{
+
+			var user = UserManager.FindById(id);
+
+			var logins = user.Logins;
+
+			var rolesForUser = UserManager.GetRoles(id);
+
+			using (var transaction = databaseConnection.Database.BeginTransaction())
+			{
+				foreach(var login in logins.ToList())
+				{
+					UserManager.RemoveLogin(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+				}
+				if(rolesForUser.Count() > 0)
+				{
+					foreach(var role in rolesForUser.ToList())
+					{
+						var result = UserManager.RemoveFromRole(user.Id, role);
+					}
+				}
+				UserManager.Delete(user);
+			}
+			return 1;
+		}
+
+		public string getUserEmail(string id)
+		{
+			var user = UserManager.FindById(id);
+			return user.Email;
+		}
+
+		public int updateUserPassword(PasswordReset reset)
+		{
+			if (UserManager.HasPassword(reset.userID))
+			{
+				//UserManager.RemovePassword(reset.userID);
+				//UserManager.AddPassword(reset.userID, reset.ConfirmNewPassword);
+				var user = UserManager.FindById(reset.userID);
+				string oldPass = user.PasswordHash;
+				UserManager.ChangePassword(reset.userID, oldPass, reset.ConfirmNewPassword);
+
+			}
+			return 1;
+		}
+		#endregion Users
+	}
 }

@@ -16,7 +16,12 @@ namespace RoomReservationManagement.GeneralClasses
          * to add data and get times back.
          */
 
-
+		/// <summary>
+		/// Function takes in a datetime object and converts it to a string
+		/// in the mm/dd/yyyy format
+		/// </summary>
+		/// <param name="date"></param>
+		/// <returns></returns>
         public string convertStampToDateString(DateTime date)
         {
             string DateString = "";
@@ -24,7 +29,11 @@ namespace RoomReservationManagement.GeneralClasses
             return DateString;
         }
 
-
+		/// <summary>
+		/// Takes in a datetime object and converts it to just a time string
+		/// </summary>
+		/// <param name="time"></param>
+		/// <returns></returns>
         public string convertStampToTimeString(DateTime time)
         {
             string TimeString = "";
@@ -32,7 +41,13 @@ namespace RoomReservationManagement.GeneralClasses
             return TimeString;
         }
 
-
+		/// <summary>
+		/// takes in two strings, a date and a time, then
+		/// converts them into a datetime object
+		/// </summary>
+		/// <param name="date"></param>
+		/// <param name="time"></param>
+		/// <returns></returns>
         public DateTime convertStringToDatetime(String date, String time)
         {
             string dateAndTime = date + " " + time;
@@ -40,6 +55,11 @@ namespace RoomReservationManagement.GeneralClasses
             return returnDate;
         }
 
+		/// <summary>
+		/// Takes in a string thats a date then converts it to a datetime object
+		/// </summary>
+		/// <param name="date"></param>
+		/// <returns></returns>
         public DateTime convertDateStringToDatetime(String date)
         {     
             DateTime returnDate = Convert.ToDateTime(date, CultureInfo.InvariantCulture);

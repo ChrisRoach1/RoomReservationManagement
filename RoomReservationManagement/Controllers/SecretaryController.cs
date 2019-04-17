@@ -17,6 +17,10 @@ namespace RoomReservationManagement.Controllers
         public SecurityCheck secCheck = new SecurityCheck();
         public ErrorLogging errorLog = new ErrorLogging();
 
+		/// <summary>
+		/// Returns the index view for the secretary
+		/// </summary>
+		/// <returns></returns>
         public ActionResult Index()
         {
             if (secCheck.hasSecretaryAccess())
@@ -31,6 +35,11 @@ namespace RoomReservationManagement.Controllers
 
         }
 
+		/// <summary>
+		/// takes in the id of a reservation and rejects it
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
         public ActionResult reject(int id)
         {
             if (secCheck.hasSecretaryAccess())
@@ -53,6 +62,11 @@ namespace RoomReservationManagement.Controllers
             }
         }
         
+		/// <summary>
+		/// takes in the id of a reservation and approves it
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
         public ActionResult approve(int id)
         {
             if (secCheck.hasSecretaryAccess())

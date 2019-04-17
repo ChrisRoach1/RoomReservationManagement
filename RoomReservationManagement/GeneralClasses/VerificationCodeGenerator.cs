@@ -27,6 +27,12 @@ namespace RoomReservationManagement.GeneralClasses
      
         
         //the default value should only happen one time, when no other code exists in the system
+		/// <summary>
+		/// gets the next possible verification code, this function
+		/// will ensure we do not reuse codes and that it is sudo random
+		/// 
+		/// </summary>
+		/// <returns></returns>
         public int getVerificationCode()
         {
             int newCode;
@@ -43,7 +49,12 @@ namespace RoomReservationManagement.GeneralClasses
         }
 
 
-
+		/// <summary>
+		/// Random number generator
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns></returns>
         public int getRandomNumber(int min, int max)
         {
             Random random = new Random();

@@ -28,7 +28,10 @@ namespace RoomReservationManagement.Controllers
 
         public ApplicationDbContext databaseConnection = new ApplicationDbContext();
 
-
+		/// <summary>
+		/// Returns the home/calendar view, the MAIN page
+		/// </summary>
+		/// <returns></returns>
         public ActionResult Index()
         {
 
@@ -39,11 +42,10 @@ namespace RoomReservationManagement.Controllers
             return View();
         }
 
-        public ActionResult Error()
-        {
-            return View();
-        }
-
+		/// <summary>
+		/// Returns the requestRegister view
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult RequestRegister()
 		{
 			ViewBag.successValue = false;
@@ -51,6 +53,12 @@ namespace RoomReservationManagement.Controllers
 			
 		}
 
+		/// <summary>
+		/// Takes in a requestRegister model object and then emails the 
+		/// admin that someone is requesting an account
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public ActionResult RequestRegister(RequestRegister request)
 		{
@@ -75,6 +83,11 @@ namespace RoomReservationManagement.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Function gets all of the pending/approved reservations
+		/// to be populated into the calendar
+		/// </summary>
+		/// <returns></returns>
 		public List<events> getEventDates()
         { 
             DateTime today = DateTime.Now.Date;

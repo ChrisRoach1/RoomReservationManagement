@@ -57,6 +57,11 @@ namespace RoomReservationManagement.Models
 
 		#region email_ref CRUD
 
+		/// <summary>
+		/// Update an email address in the email_ref table
+		/// </summary>
+		/// <param name="email"></param>
+		/// <returns></returns>
 		public int updateEmail(res_email_ref email)
         {
             res_email_ref oldEntry = databaseConnection.Res_Email_refs.Where(e => e.position == email.position).SingleOrDefault();
@@ -65,6 +70,10 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// get the email of the secretary
+		/// </summary>
+		/// <returns></returns>
         public string getSecretaryEmail()
         {
             res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "Reservation Secretary").SingleOrDefault();
@@ -72,6 +81,11 @@ namespace RoomReservationManagement.Models
             return email.email_addr;
         }
 
+
+		/// <summary>
+		/// get the email address of an admin
+		/// </summary>
+		/// <returns></returns>
 		public string getAdminEmail()
 		{
 			res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "IT Admin").SingleOrDefault();
@@ -84,6 +98,11 @@ namespace RoomReservationManagement.Models
 
 		#region res_reservation CRUD
 
+		/// <summary>
+		/// Function takes in a reservation model and adds it to the database
+		/// </summary>
+		/// <param name="reservation"></param>
+		/// <returns></returns>
 		public int addReservation(res_reservations reservation)
         {
             databaseConnection.Res_Reservations.Add(reservation);
@@ -91,6 +110,13 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// will "delete" a reservation, however deleting it
+		/// just means setting the void_ind to 'y' so the record 
+		/// still exists
+		/// </summary>
+		/// <param name="reservation"></param>
+		/// <returns></returns>
         public int deleteReservation(res_reservations reservation)
         {
             res_reservations res = databaseConnection.Res_Reservations.Where(r => r.res_id == reservation.res_id).SingleOrDefault();
@@ -99,6 +125,10 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// gets all reservations and returns it as a list
+		/// </summary>
+		/// <returns></returns>
         public List<res_reservations> getAllReservations()
         {
             List<res_reservations> reservationList = new List<res_reservations>();
@@ -106,6 +136,10 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+		/// <summary>
+		/// get all the pending reservations 
+		/// </summary>
+		/// <returns></returns>
         public List<res_reservations> getAllPendingReservations()
         {
             List<res_reservations> reservationList = new List<res_reservations>();
@@ -113,6 +147,16 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+		/// <summary>
+		/// This function is used to verify there are no reservations
+		/// at the same time as a reservation being made.
+		/// It returns a list of all reservations for a specific start and end time for 
+		/// a specific room
+		/// </summary>
+		/// <param name="startTime"></param>
+		/// <param name="endTime"></param>
+		/// <param name="roomId"></param>
+		/// <returns></returns>
         public List<res_reservations> getReservationWithStartTime(DateTime startTime, DateTime endTime, int roomId)
         {
             List<res_reservations> reservationList = new List<res_reservations>();
@@ -120,6 +164,11 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+		/// <summary>
+		/// Function rejects a pending reservation, setting the rejected_ind to 'y'
+		/// </summary>
+		/// <param name="res_id"></param>
+		/// <returns></returns>
         public int rejectReservation(int res_id)
         {
             res_reservations tempRes = databaseConnection.Res_Reservations.SingleOrDefault(r => r.res_id == res_id);
@@ -131,6 +180,11 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// approves a pending reservation, setting the approved_ind to 'y'
+		/// </summary>
+		/// <param name="res_id"></param>
+		/// <returns></returns>
         public int approveReservation(int res_id)
         {
             res_reservations tempRes = databaseConnection.Res_Reservations.SingleOrDefault(r => r.res_id == res_id);
@@ -146,6 +200,11 @@ namespace RoomReservationManagement.Models
 
         #region res_reviews CRUD
 
+		/// <summary>
+		/// takes in a review model object and adds it to the database
+		/// </summary>
+		/// <param name="review"></param>
+		/// <returns></returns>
         public int addReview(res_reviews review)
         {
             databaseConnection.Res_Reviews.Add(review);
@@ -153,6 +212,10 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// gets all the reviews and returns it as a list
+		/// </summary>
+		/// <returns></returns>
         public List<res_reviews> getAllReviews()
         {
             List<res_reviews> reviewsList = new List<res_reviews>();
@@ -164,6 +227,11 @@ namespace RoomReservationManagement.Models
 
         #region res_rooms CRUD
 
+		/// <summary>
+		/// takes in a room model object and adds it to the database
+		/// </summary>
+		/// <param name="room"></param>
+		/// <returns></returns>
         public int addRoom(res_rooms room)
         {
             databaseConnection.Res_Rooms.Add(room);
@@ -171,6 +239,11 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// Will void out a designated room
+		/// </summary>
+		/// <param name="room"></param>
+		/// <returns></returns>
         public int deleteRoom(res_rooms room)
         {
             res_rooms oldRoom = databaseConnection.Res_Rooms.Where(r => r.room_id == room.room_id).SingleOrDefault();
@@ -179,6 +252,11 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// Will update a designated room to the new given values
+		/// </summary>
+		/// <param name="room"></param>
+		/// <returns></returns>
         public int updateRoom(res_rooms room)
         {
             res_rooms oldRoom = databaseConnection.Res_Rooms.Where(r => r.room_id == room.room_id).SingleOrDefault();
@@ -197,6 +275,10 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// Gets all the rooms and returns it as a list
+		/// </summary>
+		/// <returns></returns>
         public List<res_rooms> getAllRooms()
         {
             List<res_rooms> roomList = new List<res_rooms>();
@@ -204,6 +286,10 @@ namespace RoomReservationManagement.Models
             return roomList;
         }
 
+		/// <summary>
+		/// Gets all AVAILABLE rooms (i.e. void_ind = 'n')
+		/// </summary>
+		/// <returns></returns>
         public List<res_rooms> getAllAvailableRooms()
         {
             List<res_rooms> roomList = new List<res_rooms>();
@@ -211,11 +297,21 @@ namespace RoomReservationManagement.Models
             return roomList;
         }
 
+		/// <summary>
+		/// Get a specific room back
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
         public res_rooms getRoom(int id)
         {
             return databaseConnection.Res_Rooms.Where(r => r.room_id == id).SingleOrDefault();
         }
 
+		/// <summary>
+		/// Function is used to disable a room
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
         public int disableRoom(int id)
         {
             res_rooms tempRoom = databaseConnection.Res_Rooms.SingleOrDefault(r => r.room_id == id);
@@ -224,6 +320,11 @@ namespace RoomReservationManagement.Models
             return 1;
         }
 
+		/// <summary>
+		/// Function enables a room
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
         public int enableRoom(int id)
         {
             res_rooms tempRoom = databaseConnection.Res_Rooms.SingleOrDefault(r => r.room_id == id);
@@ -236,11 +337,23 @@ namespace RoomReservationManagement.Models
 
 
 		#region Users
+		/// <summary>
+		/// Gets all the current users in the users table
+		/// This will also return the accounts that are used on the 
+		/// other two applications, so be careful.
+		/// </summary>
+		/// <returns></returns>
 		public List<ApplicationUser> getAllUsers()
 		{
 			return databaseConnection.Users.ToList();
 		}
 
+		/// <summary>
+		/// Takes in a user id and deletes the user from the system completely
+		/// there is no undoing this so please be careful
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public int deleteUserAccount(string id)
 		{
 
@@ -268,6 +381,11 @@ namespace RoomReservationManagement.Models
 			return 1;
 		}
 
+		/// <summary>
+		/// Gets all the roles in the system, will also get the roles from
+		/// the other two systems
+		/// </summary>
+		/// <returns></returns>
 		public List<userRoles> getAllRoles()
 		{
 			var allRoles = databaseConnection.Roles.ToList();
@@ -284,12 +402,23 @@ namespace RoomReservationManagement.Models
 			return roles;
 		}
 
+		/// <summary>
+		/// Get the username/email for a specific user id
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public string getUserEmail(string id)
 		{
 			var user = UserManager.FindById(id);
 			return user.Email;
 		}
 
+		/// <summary>
+		/// takes in a passwordReset model object and changes 
+		/// the password for the designated user account
+		/// </summary>
+		/// <param name="reset"></param>
+		/// <returns></returns>
 		public async Task<int> updateUserPassword(PasswordReset reset)
 		{
 			if (UserManager.HasPassword(reset.userID))
@@ -308,6 +437,12 @@ namespace RoomReservationManagement.Models
 			return 1;
 		}
 
+		/// <summary>
+		/// Takes in an accountRoleChange model object and then updates the 
+		/// designated user with the new chosen role
+		/// </summary>
+		/// <param name="account"></param>
+		/// <returns></returns>
 		public int updateUserRole(accountRoleChange account)
 		{
 			UserManager.RemoveFromRole(account.userID, account.oldRole);

@@ -9,6 +9,20 @@ using Microsoft.Owin.Host.SystemWeb;
 using System.Web.Mvc;
 using Microsoft.Owin.Security;
 using RoomReservationManagement.GeneralClasses;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Threading.Tasks;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using RoomReservationManagement.Models;
+using RoomReservationManagement.GeneralClasses;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace RoomReservationManagement.Models
 {
@@ -22,6 +36,12 @@ namespace RoomReservationManagement.Models
 
 		private ApplicationUserManager _userManager;
 		public ApplicationDbContext databaseConnection = new ApplicationDbContext();
+
+		public class userRoles
+		{
+			public string roleName { get; set; }
+			public string roleID { get; set; }
+		}
 
 		public ApplicationUserManager UserManager
 		{
@@ -248,23 +268,52 @@ namespace RoomReservationManagement.Models
 			return 1;
 		}
 
+		public List<userRoles> getAllRoles()
+		{
+			var allRoles = databaseConnection.Roles.ToList();
+			List<userRoles> roles = new List<userRoles>();
+			
+			foreach(var role in allRoles)
+			{
+				roles.Add(new userRoles
+				{
+					roleID = role.Id,
+					roleName = role.Name
+				});
+			}
+			return roles;
+		}
+
 		public string getUserEmail(string id)
 		{
 			var user = UserManager.FindById(id);
 			return user.Email;
 		}
 
-		public int updateUserPassword(PasswordReset reset)
+		public async Task<int> updateUserPassword(PasswordReset reset)
 		{
 			if (UserManager.HasPassword(reset.userID))
 			{
-				//UserManager.RemovePassword(reset.userID);
-				//UserManager.AddPassword(reset.userID, reset.ConfirmNewPassword);
-				var user = UserManager.FindById(reset.userID);
-				string oldPass = user.PasswordHash;
-				UserManager.ChangePassword(reset.userID, oldPass, reset.ConfirmNewPassword);
+				
+			
+				//UserStore<ApplicationUser> store = new UserStore<ApplicationUser>();
+				
+				//string newPassword = reset.ConfirmNewPassword;
+				//String hashedNewPassword = UserManager.PasswordHasher.HashPassword(newPassword);
+				//await store.SetPasswordHashAsync(user, hashedNewPassword);
+				//await store.UpdateAsync(user);
 
+				return 1;
 			}
+			return 1;
+		}
+
+		public int updateUserRole(accountRoleChange account)
+		{
+			UserManager.RemoveFromRole(account.userID, account.oldRole);
+
+			UserManager.AddToRole(account.userID, account.newRole);
+
 			return 1;
 		}
 		#endregion Users

@@ -15,6 +15,13 @@ namespace RoomReservationManagement.GeneralClasses
     {
         public ErrorLogging errlogger = new ErrorLogging();
 
+
+		/// <summary>
+		/// Function will send an email.
+		/// </summary>
+		/// <param name="toAddress"></param>
+		/// <param name="message"></param>
+		/// <param name="subject"></param>
         public void sendEmail(string toAddress, string message, string subject)
         {
             try

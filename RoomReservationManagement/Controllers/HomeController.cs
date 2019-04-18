@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RoomReservationManagement.Models;
+using RoomReservationManagement.GeneralClasses;
 
 namespace RoomReservationManagement.Controllers
 {
@@ -27,7 +28,10 @@ namespace RoomReservationManagement.Controllers
 
         public ApplicationDbContext databaseConnection = new ApplicationDbContext();
 
-
+		/// <summary>
+		/// Returns the home/calendar view, the MAIN page
+		/// </summary>
+		/// <returns></returns>
         public ActionResult Index()
         {
 
@@ -38,13 +42,53 @@ namespace RoomReservationManagement.Controllers
             return View();
         }
 
-        public ActionResult Error()
-        {
-            return View();
-        }
+		/// <summary>
+		/// Returns the requestRegister view
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult RequestRegister()
+		{
+			ViewBag.successValue = false;
+			return View();
+			
+		}
 
+		/// <summary>
+		/// Takes in a requestRegister model object and then emails the 
+		/// admin that someone is requesting an account
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		[HttpPost]
+		public ActionResult RequestRegister(RequestRegister request)
+		{
+			DataOperations dataOps = new DataOperations();
+			EmailHelper emailHelper = new EmailHelper();
 
-        public List<events> getEventDates()
+			string AdminEmail = dataOps.getAdminEmail();
+			string body;
+			
+
+			if (ModelState.IsValid)
+			{
+				body = request.Name + ", email address: " + request.email + " has requested an account for the following reason(s): " + request.reqReason;
+				emailHelper.sendEmail(AdminEmail, body, "Room Reservation Request");
+				ViewBag.successValue = true;
+				return View();
+			}
+			else
+			{
+				return View(request);
+				ViewBag.successValue = false;
+			}
+		}
+
+		/// <summary>
+		/// Function gets all of the pending/approved reservations
+		/// to be populated into the calendar
+		/// </summary>
+		/// <returns></returns>
+		public List<events> getEventDates()
         { 
             DateTime today = DateTime.Now.Date;
             eventList eventList = new eventList();

@@ -209,13 +209,17 @@
       <DependentUpon>201902162229236_first_migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\accountRoleChange.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\cancelReservation.cs" />
     <Compile Include="Models\DataOperations.cs" />
     <Compile Include="Models\error_log.cs" />
     <Compile Include="Models\events.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PasswordReset.cs" />
+    <Compile Include="Models\RequestRegister.cs" />
     <Compile Include="Models\res_email_ref.cs" />
     <Compile Include="Models\res_reservations.cs" />
     <Compile Include="Models\res_reviews.cs" />
@@ -231,6 +235,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyle.css" />
+    <Content Include="Content\Images\sample.jpg" />
+    <Content Include="Content\Images\sample2.jpg" />
     <Content Include="Content\Images\Test Updated.jpg" />
     <Content Include="Content\Images\Admin. First Floor.jpg" />
     <Content Include="Content\pannellum\pannellum.css" />
@@ -279,7 +285,6 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\wickedpicker.css" />
     <Content Include="Content\wickedpicker.min.css" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -371,7 +376,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Reservation\makeReservation.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
@@ -382,10 +386,15 @@
     <Content Include="Views\Admin\ManageRooms.cshtml" />
     <Content Include="Views\Admin\AddNewRoom.cshtml" />
     <Content Include="Views\Admin\EditRoom.cshtml" />
+    <Content Include="Views\Home\RequestRegister.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\accountRoleChange.cshtml" />
+    <Content Include="Views\Admin\accountPasswordChange.cshtml" />
+    <Content Include="Views\Secretary\approvedRequests.cshtml" />
+    <Content Include="Views\Secretary\cancelReservation.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />

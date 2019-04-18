@@ -16,6 +16,10 @@ namespace RoomReservationManagement.Controllers
         public DataOperations dataOps = new DataOperations();
         public ErrorLogging errorLog = new ErrorLogging();
 
+		/// <summary>
+		/// Returns the makeReservation view
+		/// </summary>
+		/// <returns></returns>
         public ActionResult makeReservation()
         {
             SecurityCheck secCheck = new SecurityCheck();
@@ -35,6 +39,12 @@ namespace RoomReservationManagement.Controllers
         /*
          * Need to format email body string, add who made the reservation and the associated account
          */ 
+		 /// <summary>
+		 /// Takes in a reservation model object and completely creates the new 
+		 /// reservation, then emails the appropriate secretary 
+		 /// </summary>
+		 /// <param name="reservation"></param>
+		 /// <returns></returns>
         [HttpPost]
         public ActionResult makeReservation(res_reservations reservation)
         {
@@ -100,7 +110,7 @@ namespace RoomReservationManagement.Controllers
                 catch (Exception e)
                 {
                     errorLog.log_error("Room Reservation Management", "Reservation", "makeReservation", e.Message);
-                    return RedirectToAction("Error", "Home");
+                    return View("Error");
                 }
             }
             else

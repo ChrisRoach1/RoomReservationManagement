@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RoomReservationManagement.Models.ApplicationUser>
+
+@{
+	ViewBag.Title = "ManageUsers";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Manage Users</h2>
+
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Email)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+
+
+	@foreach (var item in Model)
+	{
+		if (item.Email != User.Identity.Name)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Email)
+				</td>
+				<td>
+					@Html.ActionLink("Change Role", "accountRoleChange", new { id = item.Id }, new { @class = "btn btn btn-info" })
+					@Html.ActionLink("Change Password", "accountPasswordChange", new { id = item.Id }, new { @class = "btn btn btn-success" })
+					@Html.ActionLink("Delete", "accountDelete", new { id = item.Id }, new { @class = "btn btn btn-danger", @OnClick = "return confirm('Are you sure you to delete this User?');" })
+				</td>
+			</tr>
+		}
+	}
+
+</table>
+

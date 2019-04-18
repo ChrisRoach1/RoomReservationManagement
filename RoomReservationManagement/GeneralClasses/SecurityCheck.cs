@@ -13,7 +13,10 @@ namespace RoomReservationManagement.GeneralClasses
     public class SecurityCheck 
     {
 
-
+		/// <summary>
+		/// Checks to see if a user has FULL access to the system
+		/// </summary>
+		/// <returns></returns>
         public Boolean hasFullAccess()
         {
 
@@ -30,6 +33,10 @@ namespace RoomReservationManagement.GeneralClasses
             
         }
 
+		/// <summary>
+		/// Checks to see if a user is a manager
+		/// </summary>
+		/// <returns></returns>
         public Boolean hasManagerAccess()
         {
 
@@ -44,6 +51,10 @@ namespace RoomReservationManagement.GeneralClasses
 
         }
 
+		/// <summary>
+		/// Checks to see if a user is an admin
+		/// </summary>
+		/// <returns></returns>
         public Boolean hasAdminAccess()
         {
 
@@ -58,6 +69,10 @@ namespace RoomReservationManagement.GeneralClasses
 
         }
 
+		/// <summary>
+		/// Checks to see if a user is a secretary
+		/// </summary>
+		/// <returns></returns>
         public Boolean hasSecretaryAccess()
         {
 

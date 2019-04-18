@@ -46,6 +46,11 @@ namespace RoomReservationManagement.Controllers
             {
                 try
                 {
+					EmailHelper emailHelper = new EmailHelper();
+					res_reservations tempData = dataOps.getReservation(id);
+					string rejectEmail = "Your reservation request for: " + tempData.Res_Rooms.room_name + " has been rejected, please contact an adminstrator for more details.";
+					string toAddr = dataOps.getEmailOnReservation(id);
+					emailHelper.sendEmail(toAddr, rejectEmail, "Request Rejected");
                     dataOps.rejectReservation(id);
 
                     return RedirectToAction("Index", "Secretary");
@@ -89,5 +94,64 @@ namespace RoomReservationManagement.Controllers
             }
         }
 
-    }
+
+		public ActionResult approvedRequests()
+		{
+			if (secCheck.hasSecretaryAccess())
+			{
+				List<res_reservations> resList = dataOps.getAllAcceptedReservations();
+				return View(resList);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		public ActionResult cancelReservation(int id)
+		{
+			if (secCheck.hasSecretaryAccess())
+			{
+				cancelReservation tempData = new cancelReservation();
+				tempData.res_id = id;
+				tempData.cancelReason = "";
+				ViewBag.successValue = false;
+				return View(tempData);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpPost]
+		public ActionResult cancelReservation(cancelReservation cancelForm)
+		{
+			if (secCheck.hasSecretaryAccess())
+			{
+				try
+				{
+					EmailHelper emailHelper = new EmailHelper();
+					res_reservations tempData = dataOps.getReservation(cancelForm.res_id);
+					string rejectEmail = "Your reservation request for: " + tempData.Res_Rooms.room_name + " has been canceled for the following reason(s): " + "\"" + cancelForm.cancelReason + "\"" +  " if you have any questions please contact an adminstrator.";
+					string toAddr = dataOps.getEmailOnReservation(cancelForm.res_id);
+					emailHelper.sendEmail(toAddr, rejectEmail, "Request Rejected");
+					dataOps.rejectReservation(cancelForm.res_id);
+					ViewBag.successValue = true;
+					return View();
+				}
+				catch(Exception e)
+				{
+					errorLog.log_error("Room Reservation Management", "Secretary", "approve", e.Message);
+					return View("Error");
+				}
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+
+	}
 }

@@ -15,6 +15,16 @@ namespace RoomReservationManagement.Models
         
         public string user_id { get; set; }
 
+		[Required]
+		[EmailAddress]
+		[Display(Name = "Email to be reached at")]
+		public string email_addr { get; set; }
+
+		[Required]
+		[Display(Name = "Phone Ext.")]
+		[StringLength(5, ErrorMessage ="Phone ext can't be longer than 5 numbers.")]
+		public string phone_ext { get; set; }
+
         [Required]
         [Display(Name = "Date")]
         public DateTime res_dt { get; set; }

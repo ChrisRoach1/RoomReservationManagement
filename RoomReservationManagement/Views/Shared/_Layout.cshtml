@@ -22,68 +22,76 @@
 <body>
     <div class="wrapper">
         <nav id="sidebar">
-            <ul class="list-unstyled components">
-                <li>
-                    @Html.ActionLink("Home", "Index", "Home")
-                </li>
-                @if (Request.IsAuthenticated)
-                {
-                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "list-unstyled components" }))
-                    {
-                        @Html.AntiForgeryToken()
+			<ul class="list-unstyled components">
+				<li>
+					@Html.ActionLink("Home", "Index", "Home")
+				</li>
+				@if (Request.IsAuthenticated)
+				{
+					using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "list-unstyled components" }))
+					{
+						@Html.AntiForgeryToken()
 
-                        <li>
-                            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                        </li>
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                    }
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Register", "RequestRegister", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                }
+						<li>
+							@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+						</li>
+						<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+					}
+				}
+				else
+				{
+					<li>@Html.ActionLink("Register", "RequestRegister", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+					<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+				}
 
-                @if (Request.IsAuthenticated)
-                {
-                    <li>
-                        @Html.ActionLink("Rooms", "Index", "Rooms")
-                    </li>
-                }
+				@if (Request.IsAuthenticated)
+				{
+					<li>
+						@Html.ActionLink("Rooms", "Index", "Rooms")
+					</li>
+				}
 
-                @if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Manager") || User.IsInRole("RR_Secretary")))
-                {
-                    <li>
-                        @Html.ActionLink("Reserve", "makeReservation", "Reservation")
-                    </li>
-                }
+				@if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Manager") || User.IsInRole("RR_Secretary")))
+				{
+					<li>
+						@Html.ActionLink("Reserve", "makeReservation", "Reservation")
+					</li>
+				}
 
-                @if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Secretary")))
-                {
-                    <li>
-                        @Html.ActionLink("Secretary", "Index", "Secretary")
-                    </li>
-                }
+				@if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Secretary")))
+				{
+					<li>
+						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Secretary</a>
+						<ul class="collapse list-unstyled" id="pageSubmenu">
+							<li>
+								@Html.ActionLink("Pending Requests", "Index", "Secretary")
+							</li>
+							<li>
+								@Html.ActionLink("Approved Requests", "approvedRequests", "Secretary")
+							</li>
+						</ul>
+					</li>
+				}
 
-                @if (User.IsInRole("RR_Admin"))
-                {
-                    <li>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
+				@if (User.IsInRole("RR_Admin"))
+				{
+					<li>
+						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
+						<ul class="collapse list-unstyled" id="pageSubmenu">
 							<li>
 								@Html.ActionLink("Manage Accounts", "manageUsers", "Admin")
 							</li>
-                            <li>
-                                @Html.ActionLink("Manage Rooms", "manageRooms", "Admin")
-                            </li>
-                            <li>
-                                <a href="#">Data Analytics</a>
-                            </li>
-                        </ul>
-                    </li>
-                }
+							<li>
+								@Html.ActionLink("Manage Rooms", "manageRooms", "Admin")
+							</li>
+							<li>
+								<a href="#">Data Analytics</a>
+							</li>
+						</ul>
+					</li>
+				}
 
-            </ul>
+			</ul>
         </nav>
 
         <div class="content">

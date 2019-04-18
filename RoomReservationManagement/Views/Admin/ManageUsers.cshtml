@@ -33,7 +33,7 @@
 				<td>
 					@Html.ActionLink("Change Role", "accountRoleChange", new { id = item.Id }, new { @class = "btn btn btn-info" })
 					@Html.ActionLink("Change Password", "accountPasswordChange", new { id = item.Id }, new { @class = "btn btn btn-success" })
-					@Html.ActionLink("Delete", "accountDelete", new { id = item.Id }, new { @class = "btn btn btn-danger", @OnClick = "return confirm('Are you sure you to delete this Record?');" })
+					@Html.ActionLink("Delete", "accountDelete", new { id = item.Id }, new { @class = "btn btn btn-danger", @OnClick = "return confirm('Are you sure you to delete this User?');" })
 				</td>
 			</tr>
 		}

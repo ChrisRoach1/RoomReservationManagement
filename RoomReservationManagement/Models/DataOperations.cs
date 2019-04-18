@@ -11,18 +11,7 @@ using Microsoft.Owin.Security;
 using RoomReservationManagement.GeneralClasses;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using RoomReservationManagement.Models;
-using RoomReservationManagement.GeneralClasses;
-using System.Web.Security;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
+
 
 namespace RoomReservationManagement.Models
 {
@@ -143,9 +132,16 @@ namespace RoomReservationManagement.Models
         public List<res_reservations> getAllPendingReservations()
         {
             List<res_reservations> reservationList = new List<res_reservations>();
-            reservationList = databaseConnection.Res_Reservations.Where(r => r.pending_ind == "y" && r.approved_ind == "n").ToList();
+            reservationList = databaseConnection.Res_Reservations.Where(r => r.pending_ind == "y" && r.approved_ind == "n" && r.void_ind == "n").ToList();
             return reservationList;
         }
+
+		public List<res_reservations> getAllAcceptedReservations()
+		{
+			List<res_reservations> reservationList = new List<res_reservations>();
+			reservationList = databaseConnection.Res_Reservations.Where(r => r.approved_ind == "y" && r.void_ind == "n").ToList();
+			return reservationList;
+		}
 
 		/// <summary>
 		/// This function is used to verify there are no reservations
@@ -157,7 +153,7 @@ namespace RoomReservationManagement.Models
 		/// <param name="endTime"></param>
 		/// <param name="roomId"></param>
 		/// <returns></returns>
-        public List<res_reservations> getReservationWithStartTime(DateTime startTime, DateTime endTime, int roomId)
+		public List<res_reservations> getReservationWithStartTime(DateTime startTime, DateTime endTime, int roomId)
         {
             List<res_reservations> reservationList = new List<res_reservations>();
             reservationList = databaseConnection.Res_Reservations.Where(r => ((r.res_start <= startTime && r.res_end >= startTime) || (r.res_start <= endTime && r.res_end >= endTime)) && r.room_id == roomId && r.reject_ind == "n" && r.void_ind == "n").ToList();
@@ -195,6 +191,22 @@ namespace RoomReservationManagement.Models
 
             return 1;
         }
+
+		/// <summary>
+		/// Function will get the email_addr on a specific reservation
+		/// </summary>
+		/// <param name="res_id"></param>
+		/// <returns></returns>
+		public string getEmailOnReservation(int res_id)
+		{
+			res_reservations tempData = databaseConnection.Res_Reservations.Where(r => r.res_id == res_id).SingleOrDefault();
+			return tempData.email_addr;
+		}
+
+		public res_reservations getReservation(int res_id)
+		{
+			return databaseConnection.Res_Reservations.Where(r => r.res_id == res_id).SingleOrDefault();
+		}
 
         #endregion res_reservation CRUD
 

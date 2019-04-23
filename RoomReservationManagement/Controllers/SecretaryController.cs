@@ -95,6 +95,10 @@ namespace RoomReservationManagement.Controllers
         }
 
 
+		/// <summary>
+		/// Returns the approvedRequest view
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult approvedRequests()
 		{
 			if (secCheck.hasSecretaryAccess())
@@ -108,6 +112,12 @@ namespace RoomReservationManagement.Controllers
 			}
 		}
 
+		/// <summary>
+		/// takes in an id of a reservation and returns the cancelReservation page to let the user
+		/// give a reason for the cancellation
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public ActionResult cancelReservation(int id)
 		{
 			if (secCheck.hasSecretaryAccess())
@@ -124,6 +134,12 @@ namespace RoomReservationManagement.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Posts the cancellation form and then cancels the reservation as well
+		/// as sends an email to the original requestor
+		/// </summary>
+		/// <param name="cancelForm"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public ActionResult cancelReservation(cancelReservation cancelForm)
 		{

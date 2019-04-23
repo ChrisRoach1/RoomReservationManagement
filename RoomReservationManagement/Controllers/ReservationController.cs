@@ -52,15 +52,37 @@ namespace RoomReservationManagement.Controllers
             VerificationCodeGenerator codeGen = new VerificationCodeGenerator();
             SecurityCheck secCheck = new SecurityCheck();
             EmailHelper emailHelper = new EmailHelper();
-
+			string secretaryEmailAddr = "";
+			string emailSubject = "";
             res_rooms chosenRoom = dataOps.getRoom(reservation.room_id);
             DateTime currentTime = DateTime.Now;
             DateTime startTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_start));
             DateTime endTime = dtHelper.convertStringToDatetime(dtHelper.convertStampToDateString(reservation.res_dt), dtHelper.convertStampToTimeString(reservation.res_end));
             List<res_reservations> roomsInTimeRange = dataOps.getReservationWithStartTime(startTime, endTime, reservation.room_id);
-            string secretaryEmailAddr = dataOps.getSecretaryEmail();
+
+
             string emailBody = "There is a pending reservation for " + startTime.ToLongDateString() + " " + startTime.ToLongTimeString() + " to " + endTime.ToLongDateString() + " " + endTime.ToLongTimeString() + " for room: " + chosenRoom.room_name;
 
+
+			if (chosenRoom.room_name.ToLower().Contains("nur"))
+			{
+				secretaryEmailAddr = dataOps.getNurseSecretaryEmail();
+				emailSubject = "pending Nursing Room Reservation";
+			}
+			else if(chosenRoom.room_name.ToLower().Contains("adm"))
+			{
+				secretaryEmailAddr = dataOps.getCEOSecretaryEmail();
+				emailSubject = "pending Administration Room Reservation";
+			}else if (chosenRoom.room_name.ToLower().Contains("class"))
+			{
+				secretaryEmailAddr = dataOps.getStaffDevSecretaryEmail();
+				emailSubject = "pending Classroom Reservation";
+			}
+			else
+			{
+				secretaryEmailAddr = dataOps.getDefaultSecretaryEmail();
+				emailSubject = "pending Room Reservation";
+			}
 
             if (!String.IsNullOrEmpty(reservation.cat_order))
             {
@@ -94,7 +116,7 @@ namespace RoomReservationManagement.Controllers
                         dataOps.addReservation(reservation);
                         ViewBag.errorMessage = "";
                         ViewBag.successValue = true;
-                        emailHelper.sendEmail(secretaryEmailAddr,emailBody, "Pending Reservation");
+                        emailHelper.sendEmail(secretaryEmailAddr,emailBody, emailSubject);
                         ViewBag.roomList = dataOps.getAllAvailableRooms();
                         return View();
 

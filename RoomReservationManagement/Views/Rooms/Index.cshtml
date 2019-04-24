@@ -4,7 +4,8 @@
     ViewBag.Title = "Rooms";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+<script type="text/javascript" src="~/Content/JS/pannellum/pannellum.js"></script>
+<link rel="stylesheet" href="~/Content/JS/pannellum/pannellum.css"/>
 
 <h1>Rooms</h1>
 <hr />
@@ -13,29 +14,32 @@
     .room {
         padding: 15px;
         background-color: #f2efef;
-        border-left: 6px solid #7f7f84;
+        border-left: 6px solid #2e9546;
         margin-bottom: 10px;
         -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
         -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
         box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-        border-color: #80D651;
+        border-color: #2e9546;
     }
 
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 7px 16px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
+    .panorama {
+        width: 550px;
+        height: 275px;
     }
 
-    #panorama {
-        width: 600px;
-        height: 400px;
+    .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
     }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
 </style>
 <html>
 <head>
@@ -49,90 +53,79 @@
 
     @foreach (var item in Model)
     {
-        <div id="accordion">
-            <div class="room">
-                <h1 style="color:#80D651;">@Html.DisplayFor(modelItem => item.room_name)</h1>
-                <div id="headingOne">
-                    <button class="button" data-toggle="collapse" data-target=#@item.room_name aria-expanded="true" aria-controls=@item.room_name>
-                        Toggle Details
-                    </button>
-                </div>
-                <div id=@item.room_name class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    Location
-                                </th>
-                                <th>
-                                    Capacity
-                                </th>
-                                <th>
-                                    Computers
-                                </th>
-                                <th>
-                                    Chairs
-                                </th>
-                                <th>
-                                    Tables
-                                </th>
-                                <th>
-                                    Board Type
-                                </th>
-                                <th>
-                                    Network Access
-                                </th>
-                                <th>
-                                    Telecon System
-                                </th>
-                                <th>
-                                    Projector
-                                </th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.location)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.room_cap)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.num_comp)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.num_chairs)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.num_tables)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.board_typ)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.network_ind)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.telecon_sys)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.proj_ind)
-                                </td>
-                            </tr>
+        <div class="room">
+            <div class="panel-group" id="accordion_@item.room_id">
+                <div class="panel panel-default" id="panel_@item.room_id">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">
+                            <a style="color:#2e9546; " data-toggle="collapse" data-target="#collapseOne_@item.room_id" href="#collapseOne_@item.room_id">
+                                @Html.DisplayFor(modelItem => item.room_name)
+                            </a>
+                        </h1>
+                    </div>
+                    <div id="collapseOne_@item.room_id" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="column">
+                                        <table>
+                                            <tr>
+                                                <th>Location:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.location)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Capacity:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.room_cap)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Computers:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.num_comp)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Chairs:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.num_chairs)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tables:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.num_tables)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Board Type:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.board_typ)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Network Access:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.network_ind)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Telecon System:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.telecon_sys)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Projector:</th>
+                                                <td>@Html.DisplayFor(modelItem => item.proj_ind)</td>
+                                            </tr>
 
-                        </table>
-                        @*@if (File.Exists("../../Content/Images/test.jpg"))
-                            {*@
-                        <div id="panorama">
-                            <script>
-                                pannellum.viewer('panorama', {
-                                    "type": "equirectangular",
-                                    "panorama": "../../Content/Images/@item.room_name"+".jpg"
-                                });
-                            </script>
+                                        </table>              
+                                    </div>
+                                    <div class="column">
+                                        <div id="pan_@item.room_name" class="panorama"></div>
+                                    </div>
+                                </div>
+                                
+                                <script>
+                    pannellum.viewer('pan_@item.room_name', {
+                        "type": "equirectangular",
+                        "panorama": "../../Content/Images/@item.room_name" + ".jpg",
+                        "autoLoad": false,
+                        "autoRotate": -6,
+                        "showControls": false,
+                        "draggable": false
+                    });
+                                </script>
+
+                            </div>
                         </div>
-                        @*}*@
-
                     </div>
                 </div>
             </div>

@@ -23,14 +23,19 @@
     }
 
     .panorama {
-        width: 550px;
-        height: 275px;
+        width: 750px;
+        height: 325px;
     }
 
     .column {
         float: left;
-        width: 50%;
         padding: 10px;
+    }
+    .left {
+        width: 30%
+    }
+    .right {
+        width: 70%
     }
 
     /* Clear floats after the columns */
@@ -39,6 +44,7 @@
         display: table;
         clear: both;
     }
+
 
 </style>
 <html>
@@ -67,7 +73,7 @@
                         <div class="panel-body">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="column">
+                                    <div class="column left">
                                         <table>
                                             <tr>
                                                 <th>Location:</th>
@@ -108,7 +114,7 @@
 
                                         </table>              
                                     </div>
-                                    <div class="column">
+                                    <div class="column right">
                                         <div id="pan_@item.room_name" class="panorama"></div>
                                     </div>
                                 </div>

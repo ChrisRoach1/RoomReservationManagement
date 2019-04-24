@@ -32,9 +32,7 @@
 					{
 						@Html.AntiForgeryToken()
 
-						<li>
-							@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-						</li>
+
 						<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
 					}
 				}
@@ -61,8 +59,8 @@
 				@if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Secretary")))
 				{
 					<li>
-						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Secretary</a>
-						<ul class="collapse list-unstyled" id="pageSubmenu">
+						<a href="#secretarySubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Secretary</a>
+						<ul class="collapse list-unstyled" id="secretarySubMenu">
 							<li>
 								@Html.ActionLink("Pending Requests", "Index", "Secretary")
 							</li>
@@ -76,8 +74,8 @@
 				@if (User.IsInRole("RR_Admin"))
 				{
 					<li>
-						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
-						<ul class="collapse list-unstyled" id="pageSubmenu">
+						<a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
+						<ul class="collapse list-unstyled" id="adminSubmenu">
 							<li>
 								@Html.ActionLink("Manage Accounts", "manageUsers", "Admin")
 							</li>

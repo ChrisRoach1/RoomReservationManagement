@@ -60,15 +60,48 @@ namespace RoomReservationManagement.Models
         }
 
 		/// <summary>
-		/// get the email of the secretary
+		/// get the email of the CEO secretary
 		/// </summary>
 		/// <returns></returns>
-        public string getSecretaryEmail()
+        public string getCEOSecretaryEmail()
         {
-            res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "Reservation Secretary").SingleOrDefault();
+            res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "CEO-Secretary").SingleOrDefault();
            
             return email.email_addr;
         }
+
+		/// <summary>
+		/// get the email of the default secretary
+		/// </summary>
+		/// <returns></returns>
+		public string getDefaultSecretaryEmail()
+		{
+			res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "Reservation Secretary").SingleOrDefault();
+
+			return email.email_addr;
+		}
+
+		/// <summary>
+		/// get the email of the nurse secretary
+		/// </summary>
+		/// <returns></returns>
+		public string getNurseSecretaryEmail()
+		{
+			res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "Nurse-Secretary").SingleOrDefault();
+
+			return email.email_addr;
+		}
+
+		/// <summary>
+		/// get the email of the staffdev secretary
+		/// </summary>
+		/// <returns></returns>
+		public string getStaffDevSecretaryEmail()
+		{
+			res_email_ref email = databaseConnection.Res_Email_refs.Where(e => e.position == "StaffDev-Secretary").SingleOrDefault();
+
+			return email.email_addr;
+		}
 
 
 		/// <summary>

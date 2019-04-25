@@ -1,0 +1,43 @@
+﻿
+@{
+	ViewBag.Title = "dataAnalytics";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Data Overview</h2>
+<hr />
+
+<h3 style="margin-top:40px;">Room Usage</h3>
+<hr />
+<div style="width:100%; height:70%;">
+	<canvas id="barChart" style="width:100%; height:70%;"></canvas>
+</div><script>
+	var ctx = document.getElementById('barChart').getContext('2d');
+	var barChart = new Chart(ctx, {
+		options: {
+			responsive: true,
+			width: 500,
+			height: 300,
+		},
+		type: 'bar',
+		data: {
+			labels: [@Html.Raw(ViewBag.graphTitles)],
+			datasets: [{
+				label: '# of times used',
+				data: [@Html.Raw(ViewBag.graphData)],
+				backgroundColor: [@Html.Raw(ViewBag.backgroundColor)],
+				borderColor: [],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>

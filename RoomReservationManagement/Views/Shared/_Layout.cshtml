@@ -12,10 +12,11 @@
 	<script src="~/Scripts/jquery-3.3.1.js"></script>
 	<script src="~/Scripts/wickedpicker.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
 	<script data-require="moment.js@**@" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
 
 </head>
@@ -83,7 +84,7 @@
 								@Html.ActionLink("Manage Rooms", "manageRooms", "Admin")
 							</li>
 							<li>
-								<a href="#">Data Analytics</a>
+								@Html.ActionLink("Data Analytics", "dataAnalytics", "Admin")
 							</li>
 						</ul>
 					</li>

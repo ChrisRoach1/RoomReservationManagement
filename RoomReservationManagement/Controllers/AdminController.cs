@@ -420,5 +420,34 @@ namespace RoomReservationManagement.Controllers
 				return RedirectToAction("Index", "Home");
 			}
 		}
+
+
+		public ActionResult dataAnalytics()
+		{
+			if (secCheck.hasAdminAccess())
+			{
+				List<roomFrequency> roomUsage = new List<roomFrequency>();
+				string graphTitles = "";
+				string graphData = "";
+				string backgroundColor = "";
+				roomUsage = dataOps.getRoomFrequency();
+				foreach (var usage in roomUsage)
+				{
+					graphTitles += "\"" + usage.roomName + "\"" + ",";
+					graphData += usage.timesUsed + ",";
+					backgroundColor += "\"" + "rgb(46,149,70)" + "\"" + ",";
+					
+				}
+				
+				ViewBag.graphTitles = graphTitles;
+				ViewBag.graphData = graphData;
+				ViewBag.backgroundColor = backgroundColor;
+				return View();
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
 	}
 }

@@ -380,7 +380,6 @@ namespace RoomReservationManagement.Models
 
 		#endregion res_rooms CRUD
 
-
 		#region Users
 		/// <summary>
 		/// Gets all the current users in the users table
@@ -497,5 +496,31 @@ namespace RoomReservationManagement.Models
 			return 1;
 		}
 		#endregion Users
+
+		#region data_analytics
+
+
+		public List<roomFrequency> getRoomFrequency()
+		{
+			List<roomFrequency> temp = new List<roomFrequency>();
+
+
+
+			var tempQuery = (from room in databaseConnection.Res_Rooms
+						join res in databaseConnection.Res_Reservations on room.room_id equals res.room_id
+						group room by room.room_name into g
+						select new roomFrequency
+						{
+							roomName = g.Key,
+							timesUsed = g.Count()
+						}).ToList();
+
+			temp = tempQuery;
+			return temp;
+
+		}
+
+		#endregion data_analytics
+
 	}
 }

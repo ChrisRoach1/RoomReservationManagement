@@ -12,7 +12,10 @@ namespace RoomReservationManagement.Controllers
     {
         public DataOperations dataOps = new DataOperations();
 
-        // GET: Rooms
+        /// <summary>
+		/// returns the room page view, populating the page with room data
+		/// </summary>
+		/// <returns></returns>
         public ActionResult Index()
         {
             SecurityCheck secCheck = new SecurityCheck();

@@ -377,7 +377,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Reservation\makeReservation.cshtml" />
-    <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Review\Details.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\Review\TestSandbox.cshtml" />

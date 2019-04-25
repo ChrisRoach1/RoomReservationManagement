@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RoomReservationManagement.Models;
+using RoomReservationManagement.GeneralClasses;
 
 namespace RoomReservationManagement.Controllers
 {
@@ -14,8 +15,18 @@ namespace RoomReservationManagement.Controllers
         // GET: Rooms
         public ActionResult Index()
         {
-            var roomData = dataOps.getAllRooms();
-            return View(roomData);
+            SecurityCheck secCheck = new SecurityCheck();
+            if (secCheck.hasFullAccess())
+            {
+                ViewBag.errorMessage = "";
+                ViewBag.successValue = false;
+                var roomData = dataOps.getAllRooms();
+                return View(roomData);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

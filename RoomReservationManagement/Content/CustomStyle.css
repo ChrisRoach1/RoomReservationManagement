@@ -103,3 +103,43 @@ a, a:hover, a:focus {
 #ReservationErrorMessage{
     color:red;
 }
+
+
+/*
+    Below is all of the room page styling
+*/
+.room {
+    padding: 15px;
+    background-color: #f2efef;
+    border-left: 6px solid #2e9546;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    border-color: #2e9546;
+}
+
+.panorama {
+    width: 95%;
+    height: 100%;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.left {
+    width: 30%
+}
+
+.right {
+    width: 70%
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

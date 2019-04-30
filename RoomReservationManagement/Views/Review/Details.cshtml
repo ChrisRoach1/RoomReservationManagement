@@ -53,29 +53,22 @@
 <body>
 
 
-    <div style="height:10px"> </div>
 
-    @*<button class="button">
-        @Html.ActionLink("Room 2 Review Details", "Details", "Review")
-    </button>*@
-    <button class="button">
-        @Html.ActionLink("Create Review", "NewReview", "Review")
-        </button>
-    
-
-        @foreach (var item in Model)
+    @foreach (var item in Model)
+    {
+        if (item.room_id == 2)
         {
-            
-                <div class="room">
-                    <h1 style="color:#80D651;">Room @Html.DisplayFor(modelItem => item.room_id)   <div class="my-rating-set"></div></h1>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.review)
-                    </p>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.audit_create_dt)
-                    </p>
+    
+            <div class="room">
+                <h1 style="color:#80D651;">Room @Html.DisplayFor(modelItem => item.room_id)   <div class="my-rating-set"></div></h1>
+                <div class="card-body">
+                    <table class="table">
+                        <p>@Html.DisplayFor(modelItem => item.review)</p>
+                        <div>@Html.DisplayFor(modelItem => item.audit_create_dt)</div>
+                    </table>
                 </div>
-          
+            </div>
+
 
             <script>
                 $(".my-rating").starRating({
@@ -94,16 +87,17 @@
                 });
             </script>
             <script>
-        $(".my-rating-set").starRating({
-            readOnly: true,
-            initialRating: @Html.DisplayFor(modelItem => item.rating),
-        starSize: 25,
-            callback: function (currentRating, $el) {
-                // make a server call here
-            }
-                    });
+                $(".my-rating-set").starRating({
+                    readOnly: true,
+                    initialRating: @Html.DisplayFor(modelItem => item.rating),
+                starSize: 25,
+                    callback: function (currentRating, $el) {
+                        // make a server call here
+                    }
+                        });
             </script>
         }
+    }
 </body>
 </html>
 

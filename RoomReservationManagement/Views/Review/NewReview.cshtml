@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "NewReview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script src="../../Content/star-rating-svg-master/dist/jquery.star-rating-svg.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../Content/star-rating-svg-master/src/css/star-rating-svg.css">
+
+<h2>Create Review</h2>
+
+<div id="headingOne">
+
+    <div class="card-body">
+            <div class="my-rating"></div>
+            <textarea rows="10" cols="50"></textarea>
+        <div></div>
+            <button class="button">Submit</button>
+    </div>
+</div>
+
+<script>
+        $(".my-rating").starRating({
+            starSize: 25,
+            hoverColor: '#4CAF50',
+            ratedColor: 'orange',
+            useGradient: false,
+            disableAfterRate: false,
+            starGradient: {
+                start: '#FEF7CD',
+                end: '#FF9511'
+            },
+            callback: function (currentRating, $el) {
+                // make a server call here
+            }
+        });
+</script>

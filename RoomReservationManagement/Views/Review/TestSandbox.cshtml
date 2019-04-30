@@ -1,0 +1,66 @@
+﻿
+
+
+@model RoomReservationManagement.Models.ViewTest
+    
+    @{
+        ViewBag.Title = "TestSandbox";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Request Account</h2>
+    <hr />
+
+
+    @using (Html.BeginForm(Html.BeginForm("TestSandboc", "Review", FormMethod.Post, new { @class = "form-horizontal", role = "form" })))
+    {
+
+    <div class="form-horizontal">
+      Fill OUT
+        <div class="form-group">
+            Room ID
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MakeRev.room_id, new { htmlAttributes = new { @class = "form-control", id = "date" } })
+            </div>
+        </div>
+
+            
+        <div class="form-group">
+            Rating
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MakeRev.rating, new { htmlAttributes = new { @class = "form-control", id = "date" } })
+            </div>
+        </div>
+
+            
+        <div class="form-group">
+            Room ID
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.MakeRev.review, new { htmlAttributes = new { @class = "form-control", id = "date" } })
+            </div>
+        </div>
+
+
+        <div class="form-group" style="margin-top: 30px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-secondary" />
+            </div>
+        </div>
+        </div>
+    }
+
+
+
+    @*@if (ViewBag.successValue)
+        {
+            //used to display success message after a reservation is made
+        <script>
+            Swal.fire(
+                'Success!',
+                'Your request has been sent to an Admin for review.',
+                'success'
+            ).then(function (result) {
+                window.location = '/';
+            })
+        </script>
+        }*@

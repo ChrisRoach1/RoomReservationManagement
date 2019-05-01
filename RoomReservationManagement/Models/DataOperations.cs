@@ -341,7 +341,7 @@ namespace RoomReservationManagement.Models
         public List<res_rooms> getAllRooms()
         {
             List<res_rooms> roomList = new List<res_rooms>();
-            roomList = databaseConnection.Res_Rooms.ToList();
+            roomList = databaseConnection.Res_Rooms.Where(r => r.void_ind == "n").ToList();
             return roomList;
         }
 

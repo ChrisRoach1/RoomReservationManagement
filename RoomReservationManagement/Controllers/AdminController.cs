@@ -422,26 +422,44 @@ namespace RoomReservationManagement.Controllers
 		}
 
 
+		/// <summary>
+		/// returns the data analytics page, this sets up all the data to be graphed on 
+		/// the page.
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult dataAnalytics()
 		{
 			if (secCheck.hasAdminAccess())
 			{
 				List<roomFrequency> roomUsage = new List<roomFrequency>();
-				string graphTitles = "";
-				string graphData = "";
+				string usageGraphTitles = "";
+				string usageGraphData = "";
 				string backgroundColor = "";
 				roomUsage = dataOps.getRoomFrequency();
 				foreach (var usage in roomUsage)
 				{
-					graphTitles += "\"" + usage.roomName + "\"" + ",";
-					graphData += usage.timesUsed + ",";
+					usageGraphTitles += "\"" + usage.roomName + "\"" + ",";
+					usageGraphData += usage.timesUsed + ",";
 					backgroundColor += "\"" + "rgb(46,149,70)" + "\"" + ",";
-					
-				}
-				
-				ViewBag.graphTitles = graphTitles;
-				ViewBag.graphData = graphData;
+
+				}	
+				ViewBag.usageGraphTitles = usageGraphTitles;
+				ViewBag.usageGraphData = usageGraphData;
 				ViewBag.backgroundColor = backgroundColor;
+
+				List<roomReviewData> roomReview = new List<roomReviewData>();
+				string reviewGraphTitles = "";
+				string reviewGraphData = "";
+				roomReview = dataOps.getRoomReviews();
+				foreach (var review in roomReview)
+				{
+					reviewGraphTitles += "\"" + review.roomName + "\"" + ",";
+					reviewGraphData += review.averageRating + ",";
+				}
+				ViewBag.reviewGraphTitles = reviewGraphTitles;
+				ViewBag.reviewGraphData = reviewGraphData;
+
+
 				return View();
 			}
 			else

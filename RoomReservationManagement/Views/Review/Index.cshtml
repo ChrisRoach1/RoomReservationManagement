@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<RoomReservationManagement.Models.res_reviews>
+﻿@model IEnumerable<RoomReservationManagement.Models.res_reviews>
 
 @{
     ViewBag.Title = "Index";
@@ -7,9 +6,7 @@
 }
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
 <script src="../../Content/star-rating-svg-master/dist/jquery.star-rating-svg.js"></script>
-
 <link rel="stylesheet" type="text/css" href="../../Content/star-rating-svg-master/src/css/star-rating-svg.css">
 
 
@@ -17,9 +14,8 @@
 
 
 
-<h1>Room Review TEMP</h1>
-
-<!DOCTYPE HTML>
+<h1>Room Reviews</h1>
+<hr />
 <style>
     .room {
         padding: 15px;
@@ -48,52 +44,52 @@
         height: 400px;
     }
 </style>
-<html>
+
 
 <body>
 
 
-    <div style="height:10px"> </div>
+	<div style="height:10px"> </div>
 
-    @*<button class="button">
-        @Html.ActionLink("Room 2 Review Details", "Details", "Review")
-    </button>*@
-    <button class="button">
-        @Html.ActionLink("Create Review", "NewReview", "Review")
-        </button>
-    
+	@*<button class="button">
+			@Html.ActionLink("Room 2 Review Details", "Details", "Review")
+		</button>*@
+	<button class="button">
+		@Html.ActionLink("Create Review", "NewReview", "Review")
+	</button>
 
-        @foreach (var item in Model)
-        {
-            
-                <div class="room">
-                    <h1 style="color:#80D651;">Room @Html.DisplayFor(modelItem => item.room_id)   <div class="my-rating-set"></div></h1>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.review)
-                    </p>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.audit_create_dt)
-                    </p>
-                </div>
-          
 
-            <script>
-                $(".my-rating").starRating({
-                    starSize: 25,
-                    hoverColor: '#4CAF50',
-                    ratedColor: 'orange',
-                    useGradient: false,
-                    disableAfterRate: false,
-                    starGradient: {
-                        start: '#FEF7CD',
-                        end: '#FF9511'
-                    },
-                    callback: function (currentRating, $el) {
-                        // make a server call here
-                    }
-                });
-            </script>
-            <script>
+	@foreach (var item in Model)
+	{
+
+		<div class="room">
+			<h1 style="color:#80D651;">@Html.DisplayFor(modelItem => item.Res_Rooms.room_name)   <div class="my-rating-set"></div></h1>
+			<p>
+				@Html.DisplayFor(modelItem => item.review)
+			</p>
+			<p>
+				@Html.DisplayFor(modelItem => item.audit_create_dt)
+			</p>
+		</div>
+
+
+		<script>
+			$(".my-rating").starRating({
+				starSize: 25,
+				hoverColor: '#4CAF50',
+				ratedColor: 'orange',
+				useGradient: false,
+				disableAfterRate: false,
+				starGradient: {
+					start: '#FEF7CD',
+					end: '#FF9511'
+				},
+				callback: function (currentRating, $el) {
+					// make a server call here
+				}
+			});
+		</script>
+		<script>
         $(".my-rating-set").starRating({
             readOnly: true,
             initialRating: @Html.DisplayFor(modelItem => item.rating),
@@ -102,8 +98,8 @@
                 // make a server call here
             }
                     });
-            </script>
-        }
+		</script>
+	}
+	<br />
 </body>
-</html>
 

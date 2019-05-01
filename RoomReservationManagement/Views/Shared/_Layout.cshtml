@@ -2,25 +2,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Room Reservation Management</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/CustomStyle.css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/wickedpicker.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/wickedpicker.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
-    <script data-require="moment.js@**@" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
-    <link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
-    <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
-    <link rel="stylesheet" href="~/Content/CustomStyle.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - Room Reservation Management</title>
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/CustomStyle.css")
+	@Scripts.Render("~/bundles/modernizr")
+	<link rel="stylesheet" href="~/Content/CustomStyle.css" />
+	<link href="~/Content/wickedpicker.min.css" rel="stylesheet" />
+	<script src="~/Scripts/jquery-3.3.1.js"></script>
+	<script src="~/Scripts/wickedpicker.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
+	<script data-require="moment.js@**@" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
+	<link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
+	<script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+
 
 </head>
 <body>
@@ -57,6 +58,12 @@
 				{
 					<li>
 						@Html.ActionLink("Reserve", "makeReservation", "Reservation")
+					</li>
+				}
+				@if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Manager")))
+				{
+					<li>
+						@Html.ActionLink("Reviews", "allReviews", "Review")
 					</li>
 				}
 

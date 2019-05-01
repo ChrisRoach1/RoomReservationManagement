@@ -169,6 +169,10 @@ namespace RoomReservationManagement.Models
             return reservationList;
         }
 
+		/// <summary>
+		/// get all the accepted reservations
+		/// </summary>
+		/// <returns></returns>
 		public List<res_reservations> getAllAcceptedReservations()
 		{
 			List<res_reservations> reservationList = new List<res_reservations>();
@@ -267,6 +271,16 @@ namespace RoomReservationManagement.Models
             reviewsList = databaseConnection.Res_Reviews.ToList();
             return reviewsList;
         }
+
+		/// <summary>
+		/// get specific 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public res_reviews getReview(int id)
+		{
+			return databaseConnection.Res_Reviews.Where(r => r.rev_id == id).SingleOrDefault();
+		}
 
         #endregion res_reviews CRUD
 
@@ -499,7 +513,10 @@ namespace RoomReservationManagement.Models
 
 		#region data_analytics
 
-
+		/// <summary>
+		/// used in data analytics page, pulls in data to show room frequency
+		/// </summary>
+		/// <returns></returns>
 		public List<roomFrequency> getRoomFrequency()
 		{
 			List<roomFrequency> temp = new List<roomFrequency>();
@@ -517,8 +534,32 @@ namespace RoomReservationManagement.Models
 
 			temp = tempQuery;
 			return temp;
-
 		}
+
+
+		/// <summary>
+		/// used in the data analytics page, shows the average review rating for each room
+		/// </summary>
+		/// <returns></returns>
+		public List<roomReviewData> getRoomReviews()
+		{
+			List<roomReviewData> temp = new List<roomReviewData>();
+
+
+
+			var tempQuery = (from room in databaseConnection.Res_Rooms
+							 join rev in databaseConnection.Res_Reviews on room.room_id equals rev.room_id
+							 group rev by room.room_name into g
+							 select new roomReviewData
+							 {
+								 roomName = g.Key,
+								 averageRating = g.Sum(i => i.rating) / g.Count()
+							 }).ToList();
+
+			temp = tempQuery;
+			return temp;
+		}
+
 
 		#endregion data_analytics
 

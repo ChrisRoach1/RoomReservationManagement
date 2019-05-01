@@ -12,14 +12,18 @@ namespace RoomReservationManagement.Models
         [Key]
         public int rev_id { get; set; }
 
+		[Required]
         [ForeignKey("Res_Rooms")]
+		[Display(Name = "Room")]
         public int room_id { get; set; }
 
         [Required]
-        public string review { get; set; }
+		[Display(Name = "Review")]
+		public string review { get; set; }
 
         [Required]
-        public int rating { get; set; }
+		[Display(Name = "Rating")]
+		public int rating { get; set; }
 
         public DateTime audit_create_dt { get; set; }
 

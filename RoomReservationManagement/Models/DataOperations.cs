@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 using RoomReservationManagement.GeneralClasses;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
-
+using Microsoft.Owin.Security.DataProtection;
 
 namespace RoomReservationManagement.Models
 {
@@ -477,18 +477,15 @@ namespace RoomReservationManagement.Models
 		/// </summary>
 		/// <param name="reset"></param>
 		/// <returns></returns>
-		public async Task<int> updateUserPassword(PasswordReset reset)
+		public int updateUserPassword(PasswordReset reset)
 		{
 			if (UserManager.HasPassword(reset.userID))
 			{
-				
-			
-				//UserStore<ApplicationUser> store = new UserStore<ApplicationUser>();
-				
-				//string newPassword = reset.ConfirmNewPassword;
-				//String hashedNewPassword = UserManager.PasswordHasher.HashPassword(newPassword);
-				//await store.SetPasswordHashAsync(user, hashedNewPassword);
-				//await store.UpdateAsync(user);
+
+				ApplicationUser user = UserManager.FindById(reset.userID);
+
+				var token = UserManager.GeneratePasswordResetToken(user.Id);
+				UserManager.ResetPassword(user.Id, token, reset.newPassword);
 
 				return 1;
 			}

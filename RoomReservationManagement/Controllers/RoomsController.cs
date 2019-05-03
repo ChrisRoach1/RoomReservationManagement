@@ -19,7 +19,7 @@ namespace RoomReservationManagement.Controllers
         public ActionResult Index()
         {
             SecurityCheck secCheck = new SecurityCheck();
-            if (secCheck.hasFullAccess())
+            if (secCheck.hasFullAccess() || User.IsInRole("RR_Basic"))
             {
                 ViewBag.errorMessage = "";
                 ViewBag.successValue = false;

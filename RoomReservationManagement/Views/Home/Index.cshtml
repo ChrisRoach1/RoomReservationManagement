@@ -10,13 +10,10 @@
 
     var eventList = @Html.Raw(Json.Encode(ViewBag.listOfEvents));
 
-    var test = $("#testData").val();
-    console.log(test);
-
     $('#calendar').fullCalendar({
         events: eventList,
         eventAfterRender: function (event, element) {
-            var tooltip = [event.title, event.start, event.end];
+            var tooltip = [event.title, event.startTime + " to " + event.endTime];
             $(element).attr("data-original-title", tooltip)
             $(element).tooltip({ container: "body", title: event.title })
         },

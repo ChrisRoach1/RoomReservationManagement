@@ -33,7 +33,7 @@ namespace RoomReservationManagement.Controllers
         {
             if (secCheck.hasAdminAccess())
             {
-                List<res_rooms> allRooms = dataOps.getAllRooms();
+                List<res_rooms> allRooms = dataOps.getAllRoomsForAdmin();
                 return View(allRooms);
             }
             else

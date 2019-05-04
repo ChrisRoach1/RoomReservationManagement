@@ -345,11 +345,18 @@ namespace RoomReservationManagement.Models
             return roomList;
         }
 
+		public List<res_rooms> getAllRoomsForAdmin()
+		{
+			List<res_rooms> roomList = new List<res_rooms>();
+			roomList = databaseConnection.Res_Rooms.ToList();
+			return roomList;
+		}
+
 		/// <summary>
 		/// Gets all AVAILABLE rooms (i.e. void_ind = 'n')
 		/// </summary>
 		/// <returns></returns>
-        public List<res_rooms> getAllAvailableRooms()
+		public List<res_rooms> getAllAvailableRooms()
         {
             List<res_rooms> roomList = new List<res_rooms>();
             roomList = databaseConnection.Res_Rooms.Where(r => r.void_ind == "n").ToList();

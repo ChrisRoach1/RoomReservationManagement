@@ -13,6 +13,8 @@ namespace RoomReservationManagement.Controllers
     {
         public string start;
         public string end;
+		public string startTime;
+		public string endTime;
         public string title;
         public string backgroundColor;
     }
@@ -89,7 +91,8 @@ namespace RoomReservationManagement.Controllers
 		/// </summary>
 		/// <returns></returns>
 		public List<events> getEventDates()
-        { 
+        {
+			DateTimeHelper timeHelper = new DateTimeHelper();
             DateTime today = DateTime.Now.Date;
             eventList eventList = new eventList();
             var futureEvents = databaseConnection.Res_Reservations.Where(r => r.res_start >= today && r.void_ind == "n" && r.reject_ind == "n").ToList();
@@ -98,11 +101,16 @@ namespace RoomReservationManagement.Controllers
             {
                 string start = eventDate.res_start.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
                 string end = eventDate.res_end.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff''");
-                string backgroundColor = (eventDate.approved_ind == "y" ? "lime" : "orange");
+				string startTime = timeHelper.convertStampToTimeString(eventDate.res_start);
+				string endTime = timeHelper.convertStampToTimeString(eventDate.res_end);
+				string backgroundColor = (eventDate.approved_ind == "y" ? "lime" : "orange");
+				
                 eventList.eList.Add(new events
                 {
                     start = start,
                     end = end,
+					startTime = startTime,
+					endTime = endTime,
                     title = eventDate.Res_Rooms.room_name,
                     backgroundColor = backgroundColor
                 });

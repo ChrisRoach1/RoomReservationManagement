@@ -1,15 +1,10 @@
 ﻿@using RoomReservationManagement.Models;
-
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div id="calendar">
 </div>
-
-
-
 
 <script type="text/javascript">
 
@@ -20,6 +15,11 @@
 
     $('#calendar').fullCalendar({
         events: eventList,
+        eventAfterRender: function (event, element) {
+            var tooltip = [event.title, event.start, event.end];
+            $(element).attr("data-original-title", tooltip)
+            $(element).tooltip({ container: "body", title: event.title })
+        },
         showNonCurrentDates: false,
         eventLimit: true, // for all non-agenda views
         views: {
@@ -27,21 +27,17 @@
             eventLimit: 20 // adjust to 6 only for agendaWeek/agendaDay
             }
         }
-});
-
+    });
 </script>
-
 
 <style>
 
-    #calendar{
-        width:75%;
+
+    #calendar {
+        width: 75%;
         height: 55%;
     }
-
-
 </style>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

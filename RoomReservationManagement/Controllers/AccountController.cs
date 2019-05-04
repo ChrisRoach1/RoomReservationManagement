@@ -160,7 +160,7 @@ namespace RoomReservationManagement.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "RR_Basic");
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     
 

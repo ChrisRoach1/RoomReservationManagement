@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using System.Threading.Tasks;
 
 namespace RoomReservationManagement.Controllers
 {
@@ -297,15 +298,9 @@ namespace RoomReservationManagement.Controllers
 			if (secCheck.hasAdminAccess())
 			{
 				string[] roles;
-				accountRoleChange tempData = new accountRoleChange();
-				
-				tempData.userName = dataOps.getUserEmail(id);
-				roles = Roles.GetRolesForUser(tempData.userName);
-				if(roles != null)
-				{
-					tempData.oldRole = roles[0];
-				}
-				tempData.newRole = "";
+				PasswordReset tempData = new PasswordReset();
+				tempData.userID = id;
+				tempData.Email = dataOps.getUserEmail(id);
 				ViewBag.successValue = false;
 				return View(tempData);
 			}
@@ -370,12 +365,16 @@ namespace RoomReservationManagement.Controllers
 				tempData.userName = dataOps.getUserEmail(id);
 				ViewBag.successValue = false;
 				tempData.userID = id;			
-				if (roleManager != null)
+				if (roleManager.Count != 0)
 				{
 					tempData.oldRole = roleManager[0];
+					tempData.newRole = "";
+					return View(tempData);
 				}
-				tempData.newRole = "";
-				return View(tempData);
+				else
+				{
+					return View("Error");
+				}
 			}
 			else
 			{

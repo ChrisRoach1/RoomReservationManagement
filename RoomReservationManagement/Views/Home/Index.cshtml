@@ -3,8 +3,15 @@
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="calendar">
+<div class="calRow">
+    <div class="calColumn">
+        <div id="calendar"></div>
+    </div>
+    <div class="legendColumn">
+        <img src="~/Content/Legend.png" class="legend" />
+    </div>
 </div>
+
 
 <script type="text/javascript">
 
@@ -13,7 +20,7 @@
     $('#calendar').fullCalendar({
         events: eventList,
         eventAfterRender: function (event, element) {
-            var tooltip = [event.title, event.startTime + " to " + event.endTime];
+            var tooltip = [event.title + " " + event.startTime + " to " + event.endTime];
             $(element).attr("data-original-title", tooltip)
             $(element).tooltip({ container: "body", title: event.title })
         },
@@ -23,16 +30,39 @@
         agenda: {
             eventLimit: 20 // adjust to 6 only for agendaWeek/agendaDay
             }
-        }
+        },
+        height: 650
     });
 </script>
 
+
 <style>
-
-
     #calendar {
-        width: 75%;
+        width: 90%;
         height: 55%;
+    }
+
+    .legend {
+        float: right;
+        width: 100%;
+        height: 100%;
+    }
+
+    .calColumn {
+        float: left;
+        width: 90%;
+        padding: 10px;
+    }
+    .legendColumn {
+        float: right;
+        width: 10%;
+    }
+
+    /* Clear floats after the columns */
+    .calRow:after {
+        content: "";
+        display: table;
+        clear: both;
     }
 </style>
 @section Scripts {

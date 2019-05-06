@@ -2,33 +2,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Room Reservation Management</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/CustomStyle.css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="~/Content/CustomStyle.css" />
-    <link href="~/Content/wickedpicker.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/wickedpicker.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
-    <script data-require="moment.js@**@" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
-    <link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
-    <script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap.bundle.min.js"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - Room Reservation Management</title>
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/CustomStyle.css")
+	@Scripts.Render("~/bundles/modernizr")
+	<link rel="stylesheet" href="~/Content/CustomStyle.css" />
+	<link href="~/Content/wickedpicker.min.css" rel="stylesheet" />
+	<script src="~/Scripts/jquery-3.3.1.js"></script>
+	<script src="~/Scripts/wickedpicker.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
+	<script data-require="moment.js@**@" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
+	<link rel="stylesheet" href="~/Content/pannellum/pannellum.css" />
+	<script type="text/javascript" src="~/Content/pannellum/pannellum.js"></script>
+
 
 
 
 </head>
 <body>
-    <div class="wrapper">
-        <nav id="sidebar">
+	<div class="wrapper">
+		<nav id="sidebar">
 			<ul class="list-unstyled components">
 				<li>
 					@Html.ActionLink("Home", "Index", "Home")
@@ -71,22 +71,31 @@
 
 				@if (Request.IsAuthenticated && (User.IsInRole("RR_Admin") || User.IsInRole("RR_Secretary")))
 				{
+					@*<li>
+				<a href="#secretarySubMenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">Secretary</a>
+				<ul class="collapse list-unstyled" id="secretarySubMenu">
 					<li>
-						<a href="#secretarySubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Secretary</a>
-						<ul class="collapse list-unstyled" id="secretarySubMenu">
-							<li>
-								@Html.ActionLink("Pending Requests", "Index", "Secretary")
-							</li>
-							<li>
-								@Html.ActionLink("Approved Requests", "approvedRequests", "Secretary")
-							</li>
-						</ul>
+						@Html.ActionLink("Pending Requests", "Index", "Secretary")
+					</li>
+					<li>
+						@Html.ActionLink("Approved Requests", "approvedRequests", "Secretary")
+					</li>
+				</ul>
+			</li>*@
+
+					<li>
+						@Html.ActionLink("Pending Requests", "Index", "Secretary")
+					</li>
+					<li>
+						@Html.ActionLink("Approved Requests", "approvedRequests", "Secretary")
 					</li>
 				}
 
+
+
 				@if (User.IsInRole("RR_Admin"))
 				{
-					<li>
+					@*<li>
 						<a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
 						<ul class="collapse list-unstyled" id="adminSubmenu">
 							<li>
@@ -99,28 +108,36 @@
 								@Html.ActionLink("Data Analytics", "dataAnalytics", "Admin")
 							</li>
 						</ul>
+					</li>*@
+
+					<li>
+						@Html.ActionLink("Manage Accounts", "manageUsers", "Admin")
+					</li>
+					<li>
+						@Html.ActionLink("Manage Rooms", "manageRooms", "Admin")
+					</li>
+					<li>
+						@Html.ActionLink("Data Analytics", "dataAnalytics", "Admin")
 					</li>
 				}
 
 			</ul>
-        </nav>
+		</nav>
 
-        <div class="content">
-            @RenderBody()
-            <footer id="footer">
-                <hr />
-                <p>&copy; @DateTime.Now.Year - Bateman Hospital - Room Reserveration</p>
-            </footer>
-        </div>
+		<div class="content">
+			@RenderBody()
+			<footer id="footer">
+				<hr />
+				<p>&copy; @DateTime.Now.Year - Bateman Hospital - Room Reserveration</p>
+			</footer>
+		</div>
 
-    </div>
+	</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
 
-
-
-    @RenderSection("scripts", required: false)
+	@RenderSection("scripts", required: false)
 </body>
 </html>

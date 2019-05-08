@@ -165,7 +165,7 @@ namespace RoomReservationManagement.Controllers
                     
 
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ManageUsers", "Admin");
                 }
                 AddErrors(result);
             }
